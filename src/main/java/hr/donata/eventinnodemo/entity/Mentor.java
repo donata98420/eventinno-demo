@@ -1,0 +1,17 @@
+package hr.donata.eventinnodemo.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name = "mentor")
+@Data
+public class Mentor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name ="email")
+    private String email;
+
+}
