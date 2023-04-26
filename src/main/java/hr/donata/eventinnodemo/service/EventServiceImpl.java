@@ -19,7 +19,6 @@ private final EventMapper eventMapper;
     public void create(EventDto eventDto) {
         Event event =  eventMapper.eventDtoToEvent(eventDto);
         eventRepository.save(event);
-        eventRepository.save(eventDto);
     }
 
 

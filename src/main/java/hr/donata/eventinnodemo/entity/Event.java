@@ -3,6 +3,7 @@ package hr.donata.eventinnodemo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -17,8 +18,6 @@ public class Event {
     private String name;
     @Column(name ="maxParticipant")
     private byte maxParticipants;
-    @Column(name ="team")
-    private String team;
     @Column(name ="registrationsNotAfter")
     private LocalDateTime registrationsNotAfter;
     @Column(name ="confirmationNotAfter")
@@ -28,9 +27,8 @@ public class Event {
     @Column(name ="weeks")
     private LocalDateTime weeks;
 
-    @ManyToOne
-    @JoinColumn(name = "mentor_id")
-    private Mentor mentor;
+    @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
+    private List<Team> teamsList;
 
 
 

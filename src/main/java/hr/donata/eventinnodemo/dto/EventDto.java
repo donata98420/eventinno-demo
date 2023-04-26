@@ -1,5 +1,6 @@
 package hr.donata.eventinnodemo.dto;
 
+import hr.donata.eventinnodemo.entity.Team;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,13 +11,11 @@ public class EventDto {
 
     private String name;
     private byte maxParticipants;
-    private String teams;
     private LocalDateTime registrationsNotAfter;
     private LocalDateTime confirmationNotAfter;
     private LocalDateTime startDate;
     private LocalDateTime weeks;
-    private Long mentorId;
-    private List<Team> teamList;
+    private List<Team> teams;
 
 
 }

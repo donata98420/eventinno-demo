@@ -1,8 +1,9 @@
 package hr.donata.eventinnodemo.repository;
 
+import hr.donata.eventinnodemo.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EventRepository extends JpaRepository {
+public interface EventRepository extends JpaRepository <Event, Long> {
 
 
 

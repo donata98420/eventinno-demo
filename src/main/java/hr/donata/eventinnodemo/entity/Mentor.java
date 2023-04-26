@@ -13,5 +13,8 @@ public class Mentor {
     private Long id;
     @Column(name ="email")
     private String email;
+    @Column(name ="team")
+    private String team;
+
 
 }
