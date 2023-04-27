@@ -1,6 +1,6 @@
 package hr.donata.eventinnodemo.service;
 
-public interface TeamService {
+public interface TeamRegistrationService {
 
 
 
