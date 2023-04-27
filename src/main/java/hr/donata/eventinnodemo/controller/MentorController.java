@@ -1,6 +1,5 @@
 package hr.donata.eventinnodemo.controller;
 
-import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.MentorDto;
 import hr.donata.eventinnodemo.service.MentorService;
 import org.springframework.http.ResponseEntity;
