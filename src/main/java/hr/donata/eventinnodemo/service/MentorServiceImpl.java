@@ -1,6 +1,8 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.MentorDto;
+import hr.donata.eventinnodemo.entity.Event;
+import hr.donata.eventinnodemo.entity.Mentor;
 import hr.donata.eventinnodemo.mapper.MentorMapper;
 import hr.donata.eventinnodemo.repository.MentorRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public void create(MentorDto mentorDto) {
-
+        Mentor mentor =  mentorMapper.mentorDtoToMentor(mentorDto);
+        mentorRepository.save(mentor);
     }
 }
