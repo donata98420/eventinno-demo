@@ -21,6 +21,10 @@ private final EventMapper eventMapper;
         eventRepository.save(event);
     }
 
+    @Override
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
+    }
 
 
 }

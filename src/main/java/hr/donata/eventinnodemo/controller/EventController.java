@@ -3,10 +3,7 @@ package hr.donata.eventinnodemo.controller;
 import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.service.EventService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/event")
@@ -22,5 +19,10 @@ public class EventController {
         return ResponseEntity.ok(eventDto);
     }
 
+    @DeleteMapping(path = "/delete/{id}")
+    private ResponseEntity<String> deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.ok("You deleted one event from database.");
+    }
 
 }
