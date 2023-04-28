@@ -1,13 +1,14 @@
 package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "mentor")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Mentor {
 
@@ -16,8 +17,8 @@ public class Mentor {
     private Long id;
     @Column(name ="email")
     private String email;
-    @Column(name ="team")
-    private String team;
+    @ManyToOne
+    private TeamRegistration teamRegistration;
 
 
 

@@ -1,7 +1,7 @@
 package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -9,7 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "event")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Event {
 
     @Id
@@ -19,11 +22,14 @@ public class Event {
     @Column(name ="name")
     private String name;
     @Column(name ="maxParticipant")
-    private byte maxParticipants;
+    private Byte maxParticipants;
     @Column(name ="registrationsNotAfter")
     private ZonedDateTime registrationsNotAfter;
     @Column(name ="confirmationNotAfter")
     private ZonedDateTime confirmationNotAfter;
+
+    @Column(name ="registrationNotBefore")
+    private ZonedDateTime registrationNotBefore;
     @Column(name ="startDate")
     private LocalDate startDate;
 

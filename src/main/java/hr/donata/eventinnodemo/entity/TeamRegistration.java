@@ -1,13 +1,16 @@
 package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "team")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeamRegistration {
 
     @Id
@@ -16,10 +19,10 @@ public class TeamRegistration {
     @Column(name ="name")
     private String name;
 
-    @Column(name ="event")
-    private Long event;
+    @ManyToOne
+    private Event event;
 
-    @OneToMany(mappedBy = "team", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "teamRegistration", cascade = {CascadeType.ALL})
     private List<Mentor> mentorList;
 
 
