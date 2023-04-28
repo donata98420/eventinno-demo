@@ -22,4 +22,9 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
         teamRegistrationRepository.save(teamRegistration);
     }
 
+    @Override
+    public void deleteTeamRegistration(Long id) {
+        teamRegistrationRepository.deleteById(id);
+    }
+
 }

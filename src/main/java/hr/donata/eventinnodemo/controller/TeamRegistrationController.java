@@ -5,10 +5,7 @@ import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.service.TeamRegistrationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/teamRegistration")
@@ -26,6 +23,12 @@ public class TeamRegistrationController {
     private ResponseEntity<TeamRegistrationDto> saveTeamRegistration(@RequestBody TeamRegistrationDto teamRegistrationDto) {
         teamRegistrationService.create(teamRegistrationDto);
         return ResponseEntity.ok(teamRegistrationDto);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    private ResponseEntity<String> deleteTeamRegistration(@PathVariable Long id) {
+        teamRegistrationService.deleteTeamRegistration(id);
+        return ResponseEntity.ok("You deleted one team from database.");
     }
 
 

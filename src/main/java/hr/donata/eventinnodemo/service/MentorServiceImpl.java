@@ -23,4 +23,9 @@ public class MentorServiceImpl implements MentorService {
         Mentor mentor =  mentorMapper.mentorDtoToMentor(mentorDto);
         mentorRepository.save(mentor);
     }
+
+    @Override
+    public void deleteMentor(Long id) {
+        mentorRepository.deleteById(id);
+    }
 }
