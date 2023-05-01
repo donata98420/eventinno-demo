@@ -13,7 +13,7 @@ public class TeamRegistrationController {
     private final TeamRegistrationService teamRegistrationService;
     private final TeamRegistrationMapper teamRegistrationMapper;
 
-    public TeamRegistrationController(TeamRegistrationService teamService, TeamRegistrationService teamRegistrationService, TeamRegistrationMapper teamRegistrationMapper) {
+    public TeamRegistrationController(TeamRegistrationService teamRegistrationService,  TeamRegistrationMapper teamRegistrationMapper) {
         this.teamRegistrationService = teamRegistrationService;
 
         this.teamRegistrationMapper = teamRegistrationMapper;
