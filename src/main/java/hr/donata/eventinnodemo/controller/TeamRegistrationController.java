@@ -15,7 +15,6 @@ public class TeamRegistrationController {
 
     public TeamRegistrationController(TeamRegistrationService teamRegistrationService,  TeamRegistrationMapper teamRegistrationMapper) {
         this.teamRegistrationService = teamRegistrationService;
-
         this.teamRegistrationMapper = teamRegistrationMapper;
     }
 

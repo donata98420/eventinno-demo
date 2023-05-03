@@ -2,8 +2,8 @@ package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name ="name")
+    @Column(name ="name", unique = true)
     private String name;
     @Column(name ="maxParticipant")
     private Byte maxParticipants;
@@ -29,7 +29,7 @@ public class Event {
     private ZonedDateTime confirmationNotAfter;
 
     @Column(name ="registrationNotBefore")
-    private ZonedDateTime registrationNotBefore;
+    private LocalDateTime registrationNotBefore;
     @Column(name ="startDate")
     private LocalDate startDate;
 
@@ -39,7 +39,8 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
     private List<TeamRegistration> teamRegistrationList;
 
+    public List<TeamRegistration> getTeamRegistrations() {
 
-
-
+        return teamRegistrationList;
+    }
 }

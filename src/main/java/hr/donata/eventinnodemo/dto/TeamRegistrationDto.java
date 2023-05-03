@@ -1,9 +1,7 @@
 package hr.donata.eventinnodemo.dto;
 
 import lombok.*;
-
 import java.util.List;
-
 
 @NoArgsConstructor
 @AllArgsConstructor

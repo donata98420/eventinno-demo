@@ -2,7 +2,6 @@ package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
 
 @Entity
@@ -16,7 +15,7 @@ public class TeamRegistration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name ="name")
+    @Column(name ="name", unique = true)
     private String name;
 
     @ManyToOne
@@ -24,6 +23,11 @@ public class TeamRegistration {
 
     @OneToMany(mappedBy = "teamRegistration", cascade = {CascadeType.ALL})
     private List<Mentor> mentorList;
+
+    public TeamRegistration getTeamRegistration() {
+
+        return null;
+    }
 
 
 }

@@ -1,9 +1,10 @@
 package hr.donata.eventinnodemo.dto;
 
 import lombok.*;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -16,12 +17,22 @@ public class EventDto {
     private Byte maxParticipants;
     private ZonedDateTime registrationsNotAfter;
     private ZonedDateTime confirmationNotAfter;
-    private ZonedDateTime registrationNotBefore;
+    private LocalDateTime registrationNotBefore;
     private LocalDate startDate;
     private Long weeks;
     private List<TeamRegistrationDto> teams;
 
 
+    public List<MentorDto> getMentors() {
+        List<MentorDto> mentors = new ArrayList<>();
+        for (TeamRegistrationDto teamRegistrationDto : teams) {
+            mentors.addAll(teamRegistrationDto.getMentors());
+        }
+        return mentors;
+    }
+    public TeamRegistrationDto getTeamRegistrationDto() {
+        return teams.get(0);
+    }
 }
 
 
