@@ -6,6 +6,7 @@ import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +32,18 @@ private  TeamRegistrationService teamRegistrationService;
 
     @Override
     public void create(EventDto eventDto) {
-
-        List<TeamRegistrationDto> teamRegistrationDtos = new ArrayList<>();
-        Event event = eventMapper.eventDtoToEvent(eventDto);
-        teamRegistrationDtos = eventDto.getTeams();
-        for (TeamRegistrationDto teamRegistrationDto : teamRegistrationDtos) {
-            teamRegistrationService.create(teamRegistrationDto);
+        try {
+            List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
+            Event event = eventMapper.eventDtoToEvent(eventDto);
+            for (TeamRegistrationDto teamRegistrationDto : teamRegistrationDtos) {
+                teamRegistrationService.create(teamRegistrationDto);
+            }
+            eventRepository.save(event);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("Event name already exists. Try another one.");
         }
-        eventRepository.save(event);
     }
+
 
     @Override
     public void deleteEvent(Long id) {

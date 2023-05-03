@@ -24,10 +24,5 @@ public class TeamRegistration {
     @OneToMany(mappedBy = "teamRegistration", cascade = {CascadeType.ALL})
     private List<Mentor> mentorList;
 
-    public TeamRegistration getTeamRegistration() {
-
-        return null;
-    }
-
 
 }
