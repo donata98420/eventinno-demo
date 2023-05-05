@@ -9,25 +9,15 @@ import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TeamRegistrationServiceImpl implements TeamRegistrationService {
-    private  TeamRegistrationRepository teamRegistrationRepository;
-    private  TeamRegistrationMapper teamRegistrationMapper;
-    private  MentorService mentorService;
-    private  TeamRegistrationController teamRegistration;
+    private  final TeamRegistrationRepository teamRegistrationRepository;
+    private  final TeamRegistrationMapper teamRegistrationMapper;
+    private final MentorService mentorService;
 
-    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, MentorService mentorService, TeamRegistrationController teamRegistration) {
-        this.teamRegistrationRepository = teamRegistrationRepository;
-        this.teamRegistrationMapper = teamRegistrationMapper;
-        this.mentorService = mentorService;
-        this.teamRegistration = teamRegistration;
-    }
-
-    @Autowired
-    public void setDependencies(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, MentorService mentorService) {
+    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, MentorService mentorService){
         this.teamRegistrationRepository = teamRegistrationRepository;
         this.teamRegistrationMapper = teamRegistrationMapper;
         this.mentorService = mentorService;
@@ -50,6 +40,8 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
         }
         teamRegistrationRepository.save(teamRegistration);
     }
+
+
     @Override
     public void deleteTeamRegistration(Long id) {
         teamRegistrationRepository.deleteById(id);

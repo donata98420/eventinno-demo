@@ -28,8 +28,8 @@ public class Event {
     @Column(name ="confirmationNotAfter")
     private ZonedDateTime confirmationNotAfter;
 
-    @Column(name ="registrationNotBefore")
-    private LocalDateTime registrationNotBefore;
+    @Column(name ="registrationsNotBefore")
+    private LocalDateTime registrationsNotBefore;
     @Column(name ="startDate")
     private LocalDate startDate;
 

@@ -17,7 +17,7 @@ public class EventDto {
     private Byte maxParticipants;
     private ZonedDateTime registrationsNotAfter;
     private ZonedDateTime confirmationNotAfter;
-    private LocalDateTime registrationNotBefore;
+    private ZonedDateTime registrationsNotBefore;
     private LocalDate startDate;
     private Long weeks;
     private List<TeamRegistrationDto> teams;

@@ -1,7 +1,6 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.MentorDto;
-import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Mentor;
 import hr.donata.eventinnodemo.mapper.MentorMapper;
 import hr.donata.eventinnodemo.repository.MentorRepository;
@@ -16,7 +15,6 @@ public class MentorServiceImpl implements MentorService {
         this.mentorRepository = mentorRepository;
         this.mentorMapper = mentorMapper;
     }
-
 
     @Override
     public void create(MentorDto mentorDto) {

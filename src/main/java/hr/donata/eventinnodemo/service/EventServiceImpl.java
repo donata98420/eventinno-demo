@@ -8,14 +8,13 @@ import hr.donata.eventinnodemo.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService{
-private  EventRepository eventRepository;
-private  EventMapper eventMapper;
-private  TeamRegistrationService teamRegistrationService;
+private final  EventRepository eventRepository;
+private final EventMapper eventMapper;
+private final TeamRegistrationService teamRegistrationService;
 
     public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, TeamRegistrationService teamRegistrationService) {
         this.eventRepository = eventRepository;
@@ -23,12 +22,7 @@ private  TeamRegistrationService teamRegistrationService;
         this.teamRegistrationService = teamRegistrationService;
     }
 
-    @Autowired
-    public void setDependencies(EventRepository eventRepository, EventMapper eventMapper, TeamRegistrationService teamRegistrationService) {
-        this.eventRepository = eventRepository;
-        this.eventMapper = eventMapper;
-        this.teamRegistrationService = teamRegistrationService;
-    }
+
 
     @Override
     public void create(EventDto eventDto) {
@@ -40,10 +34,9 @@ private  TeamRegistrationService teamRegistrationService;
             }
             eventRepository.save(event);
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("Event name already exists. Try another one.");
+            throw new IllegalArgumentException("This event name already exists. Try another one.");
         }
     }
-
 
     @Override
     public void deleteEvent(Long id) {
