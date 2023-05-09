@@ -1,13 +1,11 @@
 package hr.donata.eventinnodemo.service;
 
-import hr.donata.eventinnodemo.controller.TeamRegistrationController;
 import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.MentorDto;
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.TeamRegistration;
 import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -30,14 +30,13 @@ private final TeamRegistrationService teamRegistrationService;
     @Override
     public void create(EventDto eventDto) {
         try {
-            // Check if an event with the same name already exists
+
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
-                throw new BadRequestException("An event with the same name already exists.");
+                throw new BadRequestException("This team name already exists.");
             }
 
             List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
 
-            // Check if multiple teams have the same name
             if (teamRegistrationDtos.stream().map(TeamRegistrationDto::getName).distinct().count() != teamRegistrationDtos.size()) {
                 throw new BadRequestException("Multiple teams have the same name.");
             }
@@ -49,11 +48,11 @@ private final TeamRegistrationService teamRegistrationService;
             eventRepository.save(event);
 
         } catch (DataIntegrityViolationException e) {
-            throw new BadRequestException("This event name already exists. Try another one.");
+            throw new BadRequestException("This event name already exists. Try with another one.");
         } catch (BadRequestException e) {
             throw e;
         } catch (Exception e) {
-            throw new RuntimeException("An unexpected error occurred.", e);
+            throw new RuntimeException("Oooops. An unexpected error occurred.", e);
         }
     }
 
