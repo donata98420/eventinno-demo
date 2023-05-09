@@ -54,7 +54,7 @@ private final TeamRegistrationService teamRegistrationService;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public class BadRequestException extends IllegalArgumentException {
+    public static class BadRequestException extends IllegalArgumentException {
         public BadRequestException(String message) {
             super(message);
         }
@@ -62,6 +62,7 @@ private final TeamRegistrationService teamRegistrationService;
 
     @Override
     public void deleteEvent(Long id) {
+
         eventRepository.deleteById(id);
     }
 
