@@ -1,6 +1,5 @@
 package hr.donata.eventinnodemo.controller;
 
-
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.service.TeamRegistrationService;
