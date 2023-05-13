@@ -1,6 +1,8 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
+import hr.donata.eventinnodemo.entity.Mentor;
+import hr.donata.eventinnodemo.entity.TeamRegistration;
 import hr.donata.eventinnodemo.mapper.MentorMapper;
 import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
@@ -23,6 +25,8 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
 
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
+        TeamRegistration teamRegistration =  teamRegistrationMapper.teamRegistrationDtoToTeamRegistration(teamRegistrationDto);
+        teamRegistrationRepository.save(teamRegistration);
 
     }
 

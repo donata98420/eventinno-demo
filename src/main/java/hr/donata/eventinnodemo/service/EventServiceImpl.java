@@ -29,7 +29,7 @@ private final TeamRegistrationService teamRegistrationService;
         try {
 
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
-                throw new BadRequestException("This team name already exists.");
+                throw new BadRequestException("Sorry, this team name already exists.");
             }
 
             List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
@@ -56,6 +56,7 @@ private final TeamRegistrationService teamRegistrationService;
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class BadRequestException extends IllegalArgumentException {
         public BadRequestException(String message) {
+
             super(message);
         }
     }
