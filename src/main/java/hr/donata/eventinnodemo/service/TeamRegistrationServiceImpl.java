@@ -32,6 +32,7 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     public void create(TeamRegistrationDto teamRegistrationDto) {
         Event event = eventRepository.findById(teamRegistrationDto.getEventId()).orElseThrow(()
                 -> new EntityNotFoundException("Event not found"));
+
         TeamRegistration teamRegistration =  teamRegistrationMapper.teamRegistrationDtoToTeamRegistration(teamRegistrationDto);
         teamRegistration.setEvent(event);
         teamRegistrationRepository.save(teamRegistration);
