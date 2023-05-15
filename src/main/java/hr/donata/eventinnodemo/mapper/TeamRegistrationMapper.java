@@ -8,8 +8,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface TeamRegistrationMapper {
-
-
     TeamRegistrationMapper INSTANCE = Mappers.getMapper(TeamRegistrationMapper.class);
 
     @Mapping(source = "eventId" , target = "event.id")
