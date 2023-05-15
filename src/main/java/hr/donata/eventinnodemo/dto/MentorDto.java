@@ -9,5 +9,4 @@ import lombok.*;
 public class MentorDto {
     private String email;
 
-
 }

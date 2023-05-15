@@ -21,15 +21,19 @@ public class Event {
 
     @Column(name ="name", unique = true)
     private String name;
+
     @Column(name ="maxParticipant")
     private Byte maxParticipants;
+
     @Column(name ="registrationsNotAfter")
     private ZonedDateTime registrationsNotAfter;
+
     @Column(name ="confirmationNotAfter")
     private ZonedDateTime confirmationNotAfter;
 
     @Column(name ="registrationsNotBefore")
     private LocalDateTime registrationsNotBefore;
+
     @Column(name ="startDate")
     private LocalDate startDate;
 

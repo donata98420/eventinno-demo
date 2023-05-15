@@ -20,18 +20,6 @@ public class EventDto {
     private LocalDate startDate;
     private Long weeks;
     private List<TeamRegistrationDto> teams;
-
-
-    public List<MentorDto> getMentors() {
-        List<MentorDto> mentors = new ArrayList<>();
-        for (TeamRegistrationDto teamRegistrationDto : teams) {
-            mentors.addAll(teamRegistrationDto.getMentors());
-        }
-        return mentors;
-    }
-    public TeamRegistrationDto getTeamRegistrationDto() {
-        return teams.get(0);
-    }
 }
 
 

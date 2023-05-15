@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService{
-private final  EventRepository eventRepository;
+private final EventRepository eventRepository;
 private final EventMapper eventMapper;
 private final TeamRegistrationService teamRegistrationService;
 
@@ -39,10 +39,12 @@ private final TeamRegistrationService teamRegistrationService;
             }
 
             Event event = eventMapper.eventDtoToEvent(eventDto);
+            event = eventRepository.save(event);
             for (TeamRegistrationDto teamRegistrationDto : teamRegistrationDtos) {
+                teamRegistrationDto.setEventId(event.getId());
                 teamRegistrationService.create(teamRegistrationDto);
             }
-            eventRepository.save(event);
+
 
         } catch (DataIntegrityViolationException e) {
             throw new BadRequestException("This event name already exists. Try with another one.");
@@ -56,14 +58,12 @@ private final TeamRegistrationService teamRegistrationService;
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class BadRequestException extends IllegalArgumentException {
         public BadRequestException(String message) {
-
             super(message);
         }
     }
 
     @Override
     public void deleteEvent(Long id) {
-
         eventRepository.deleteById(id);
     }
 

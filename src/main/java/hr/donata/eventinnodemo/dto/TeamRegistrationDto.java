@@ -12,6 +12,8 @@ public class TeamRegistrationDto {
     private String name;
     private List<MentorDto> mentors;
 
+    private Long eventId;
+
 
 
 }
