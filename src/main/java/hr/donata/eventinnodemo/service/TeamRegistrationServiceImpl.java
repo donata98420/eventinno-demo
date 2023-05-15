@@ -3,7 +3,6 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.TeamRegistration;
-import hr.donata.eventinnodemo.mapper.MentorMapper;
 import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
@@ -14,16 +13,11 @@ import org.springframework.stereotype.Service;
 public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     private final TeamRegistrationRepository teamRegistrationRepository;
     private final TeamRegistrationMapper teamRegistrationMapper;
-    private final MentorMapper mentorMapper;
-    private final MentorService mentorService;
-
     private final EventRepository eventRepository;
 
-    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, MentorMapper mentorMapper, MentorService mentorService, EventRepository eventRepository){
+    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, EventRepository eventRepository){
         this.teamRegistrationRepository = teamRegistrationRepository;
         this.teamRegistrationMapper = teamRegistrationMapper;
-        this.mentorMapper = mentorMapper;
-        this.mentorService = mentorService;
         this.eventRepository = eventRepository;
     }
 
@@ -31,7 +25,7 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
         Event event = eventRepository.findById(teamRegistrationDto.getEventId()).orElseThrow(()
-                -> new EntityNotFoundException("Event not found"));
+                -> new EntityNotFoundException("Event not found."));
 
         TeamRegistration teamRegistration =  teamRegistrationMapper.teamRegistrationDtoToTeamRegistration(teamRegistrationDto);
         teamRegistration.setEvent(event);
@@ -41,6 +35,7 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
 
     @Override
     public void deleteTeamRegistration(Long id) {
+
         teamRegistrationRepository.deleteById(id);
     }
 

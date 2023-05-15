@@ -23,5 +23,6 @@ public class Mentor {
     private TeamRegistration teamRegistration;
 
 
-
+    public void setEvent(Event event) {
+    }
 }

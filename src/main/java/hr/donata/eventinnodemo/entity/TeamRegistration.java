@@ -24,7 +24,7 @@ public class TeamRegistration {
     private Event event;
 
     @OneToMany(mappedBy = "teamRegistration", cascade = {CascadeType.ALL})
-    private List<Mentor> mentorList;
+    private List<Mentor> mentors;
 
 
 }

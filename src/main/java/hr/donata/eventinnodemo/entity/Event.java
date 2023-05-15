@@ -43,8 +43,5 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
     private List<TeamRegistration> teamRegistrationList;
 
-    public List<TeamRegistration> getTeamRegistrations() {
 
-        return teamRegistrationList;
-    }
 }
