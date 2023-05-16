@@ -10,8 +10,9 @@ import org.mapstruct.factory.Mappers;
 public interface TeamRegistrationMapper {
     TeamRegistrationMapper INSTANCE = Mappers.getMapper(TeamRegistrationMapper.class);
 
-    @Mapping(source = "eventId" , target = "event.id")
+    @Mapping(source = "eventId", target = "event.id")
     TeamRegistration teamRegistrationDtoToTeamRegistration(TeamRegistrationDto teamRegistrationDto);
+
 
 
 }
