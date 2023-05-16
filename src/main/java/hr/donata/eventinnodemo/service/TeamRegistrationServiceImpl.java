@@ -1,5 +1,6 @@
 package hr.donata.eventinnodemo.service;
 
+import hr.donata.eventinnodemo.dto.MentorDto;
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.TeamRegistration;
@@ -9,16 +10,20 @@ import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     private final TeamRegistrationRepository teamRegistrationRepository;
     private final TeamRegistrationMapper teamRegistrationMapper;
     private final EventRepository eventRepository;
+    private final MentorService mentorService;
 
-    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, EventRepository eventRepository){
+    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository, TeamRegistrationMapper teamRegistrationMapper, EventRepository eventRepository, MentorService mentorService){
         this.teamRegistrationRepository = teamRegistrationRepository;
         this.teamRegistrationMapper = teamRegistrationMapper;
         this.eventRepository = eventRepository;
+        this.mentorService = mentorService;
     }
 
 
@@ -27,9 +32,19 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
         Event event = eventRepository.findById(teamRegistrationDto.getEventId()).orElseThrow(()
                 -> new EntityNotFoundException("Event not found."));
 
+        List<MentorDto> mentorDtos = teamRegistrationDto.getMentors();
+
+        if (mentorDtos.stream().map(MentorDto::getEmail).distinct().count() != mentorDtos.size()) {
+            throw new MentorServiceImpl.BadRequestException("Multiple mentors have the same name.");
+        }
         TeamRegistration teamRegistration =  teamRegistrationMapper.teamRegistrationDtoToTeamRegistration(teamRegistrationDto);
         teamRegistration.setEvent(event);
         teamRegistrationRepository.save(teamRegistration);
+
+        for (MentorDto mentorDto : mentorDtos) {
+            mentorDto.setTeamRegistrationId(teamRegistration.getId());
+            mentorService.create(mentorDto);
+        }
 
     }
 

@@ -1,11 +1,11 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.MentorDto;
-import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Mentor;
+import hr.donata.eventinnodemo.entity.TeamRegistration;
 import hr.donata.eventinnodemo.mapper.MentorMapper;
-import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.MentorRepository;
+import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 public class MentorServiceImpl implements MentorService {
     private final MentorRepository mentorRepository;
     private final MentorMapper mentorMapper;
-    private final EventRepository eventRepository;
 
+    private final TeamRegistrationRepository teamRegistrationRepository;
 
-    public MentorServiceImpl(MentorRepository mentorRepository, MentorMapper mentorMapper, EventRepository eventRepository) {
+    public MentorServiceImpl(MentorRepository mentorRepository, MentorMapper mentorMapper, TeamRegistrationRepository teamRegistrationRepository) {
         this.mentorRepository = mentorRepository;
         this.mentorMapper = mentorMapper;
-        this.eventRepository = eventRepository;
+        this.teamRegistrationRepository = teamRegistrationRepository;
     }
 
 
@@ -37,11 +37,11 @@ public class MentorServiceImpl implements MentorService {
                 throw new BadRequestException("Sorry, this mentor email already exists.");
             }
 
-            Event event = eventRepository.findById(mentorDto.getEventId())
+            TeamRegistration teamRegistration =  teamRegistrationRepository.findById(mentorDto.getTeamRegistrationId())
                     .orElseThrow(() -> new NotFoundException("Event is not found."));
 
             Mentor mentor = mentorMapper.mentorDtoToMentor(mentorDto);
-            mentor.setEvent(event);
+            mentor.setTeamRegistration(teamRegistration);
             mentorRepository.save(mentor);
 
         } catch (DataIntegrityViolationException e) {

@@ -10,15 +10,5 @@ public class MentorDto {
 
     private String email;
 
-    private Long eventId;
-
-    public Long getEventId() {
-
-        return eventId;
-    }
-
-
-
-
-
+    private Long teamRegistrationId;
 }

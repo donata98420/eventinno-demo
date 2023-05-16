@@ -19,10 +19,10 @@ public class Mentor {
     @Column(name ="email")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teamRegstrationId")
     private TeamRegistration teamRegistration;
 
 
-    public void setEvent(Event event) {
-    }
+
 }
