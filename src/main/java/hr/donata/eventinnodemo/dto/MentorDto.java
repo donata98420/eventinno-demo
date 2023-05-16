@@ -7,17 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 public class MentorDto {
-    public MentorDto(String email) {
-
-        this.email = email;
-    }
 
     private String email;
-
-    public MentorDto(Long eventId) {
-
-        this.eventId = eventId;
-    }
 
     private Long eventId;
 

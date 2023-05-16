@@ -9,11 +9,5 @@ import org.mapstruct.factory.Mappers;
 public interface MentorMapper {
 
     MentorMapper INSTANCE = Mappers.getMapper(MentorMapper.class);
-
     Mentor mentorDtoToMentor(MentorDto mentorDto);
-
-
-
-
-
 }
