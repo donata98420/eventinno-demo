@@ -9,7 +9,6 @@ import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class MentorServiceImpl implements MentorService {
     private final MentorRepository mentorRepository;

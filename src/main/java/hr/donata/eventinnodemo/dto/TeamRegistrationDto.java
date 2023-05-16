@@ -2,6 +2,8 @@ package hr.donata.eventinnodemo.dto;
 
 import hr.donata.eventinnodemo.entity.Event;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -11,7 +13,7 @@ import java.util.List;
 public class TeamRegistrationDto {
 
     private String name;
-    private List<MentorDto> mentors;
+    private List<MentorDto> mentors = new ArrayList<>();
     private Event event;
     private Long eventId;
 
