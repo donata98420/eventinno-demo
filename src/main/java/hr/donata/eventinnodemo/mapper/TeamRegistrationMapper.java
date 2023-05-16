@@ -14,5 +14,4 @@ public interface TeamRegistrationMapper {
     TeamRegistration teamRegistrationDtoToTeamRegistration(TeamRegistrationDto teamRegistrationDto);
 
 
-
 }
