@@ -1,5 +1,3 @@
-package hr.donata.eventinnodemo.controller;
-
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.service.TeamRegistrationService;
@@ -18,16 +16,14 @@ public class TeamRegistrationController {
     }
 
     @PostMapping(path = "/save")
-    private ResponseEntity<TeamRegistrationDto> saveTeamRegistration(@RequestBody TeamRegistrationDto teamRegistrationDto) {
+    public ResponseEntity<TeamRegistrationDto> saveTeamRegistration(@RequestBody TeamRegistrationDto teamRegistrationDto) {
         teamRegistrationService.create(teamRegistrationDto);
         return ResponseEntity.ok(teamRegistrationDto);
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    private ResponseEntity<String> deleteTeamRegistration(@PathVariable Long id) {
+    public ResponseEntity<String> deleteTeamRegistration(@PathVariable Long id) {
         teamRegistrationService.deleteTeamRegistration(id);
-        return ResponseEntity.ok("You deleted one team from database.");
+        return ResponseEntity.ok("You deleted one team from the database.");
     }
-
-
 }

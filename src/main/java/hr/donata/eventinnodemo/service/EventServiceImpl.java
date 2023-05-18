@@ -13,9 +13,9 @@ import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService{
-private final EventRepository eventRepository;
-private final EventMapper eventMapper;
-private final TeamRegistrationService teamRegistrationService;
+    private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
+    private final TeamRegistrationService teamRegistrationService;
 
     public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, TeamRegistrationService teamRegistrationService) {
         this.eventRepository = eventRepository;

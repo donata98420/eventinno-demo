@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class MentorServiceImpl implements MentorService {
     private final MentorRepository mentorRepository;
     private final MentorMapper mentorMapper;
-
     private final TeamRegistrationRepository teamRegistrationRepository;
 
     public MentorServiceImpl(MentorRepository mentorRepository, MentorMapper mentorMapper, TeamRegistrationRepository teamRegistrationRepository) {
@@ -21,7 +20,6 @@ public class MentorServiceImpl implements MentorService {
         this.mentorMapper = mentorMapper;
         this.teamRegistrationRepository = teamRegistrationRepository;
     }
-
 
     @Override
     public void deleteMentor(Long id) {
@@ -54,6 +52,7 @@ public class MentorServiceImpl implements MentorService {
 
     public static class BadRequestException extends RuntimeException {
         public BadRequestException(String message) {
+
             super(message);
         }
     }
@@ -66,7 +65,3 @@ public class MentorServiceImpl implements MentorService {
 
 
 }
-
-
-
-

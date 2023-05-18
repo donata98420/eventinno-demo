@@ -30,14 +30,17 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
         Event event = eventRepository.findById(teamRegistrationDto.getEventId()).orElseThrow(()
-                -> new EntityNotFoundException("Event not found."));
+                -> new EntityNotFoundException("Sorry, event not found."));
 
         List<MentorDto> mentorDtos = teamRegistrationDto.getMentors();
 
         if (mentorDtos.stream().map(MentorDto::getEmail).distinct().count() != mentorDtos.size()) {
             throw new MentorServiceImpl.BadRequestException("Multiple mentors have the same name.");
         }
-        TeamRegistration teamRegistration =  teamRegistrationMapper.teamRegistrationDtoToTeamRegistration(teamRegistrationDto);
+
+        TeamRegistration teamRegistration = new TeamRegistration();
+
+        teamRegistration = teamRegistrationMapper.teamRegistrationDtoToTeamRegistration(teamRegistrationDto);
         teamRegistration.setEvent(event);
         teamRegistrationRepository.save(teamRegistration);
 
@@ -45,15 +48,10 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
             mentorDto.setTeamRegistrationId(teamRegistration.getId());
             mentorService.create(mentorDto);
         }
-
     }
 
     @Override
     public void deleteTeamRegistration(Long id) {
-
         teamRegistrationRepository.deleteById(id);
     }
-
-
-
 }
