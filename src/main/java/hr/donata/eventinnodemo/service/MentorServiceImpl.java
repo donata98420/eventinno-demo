@@ -8,22 +8,24 @@ import hr.donata.eventinnodemo.repository.MentorRepository;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class MentorServiceImpl implements MentorService {
     private final MentorRepository mentorRepository;
-    private final MentorMapper mentorMapper;
     private final TeamRegistrationRepository teamRegistrationRepository;
+    private final MentorMapper mentorMapper;
 
-    public MentorServiceImpl(MentorRepository mentorRepository, MentorMapper mentorMapper, TeamRegistrationRepository teamRegistrationRepository) {
+    public MentorServiceImpl(MentorRepository mentorRepository,
+                             TeamRegistrationRepository teamRegistrationRepository, MentorMapper mentorMapper) {
         this.mentorRepository = mentorRepository;
-        this.mentorMapper = mentorMapper;
         this.teamRegistrationRepository = teamRegistrationRepository;
+        this.mentorMapper = mentorMapper;
     }
 
     @Override
     public void deleteMentor(Long id) {
-
         mentorRepository.deleteById(id);
     }
 
@@ -34,8 +36,8 @@ public class MentorServiceImpl implements MentorService {
                 throw new BadRequestException("Sorry, this mentor email already exists.");
             }
 
-            TeamRegistration teamRegistration =  teamRegistrationRepository.findById(mentorDto.getTeamRegistrationId())
-                    .orElseThrow(() -> new NotFoundException("Event is not found."));
+            TeamRegistration teamRegistration = teamRegistrationRepository.findById(mentorDto.getTeamRegistrationId())
+                    .orElseThrow(() -> new NotFoundException("Team registration is not found."));
 
             Mentor mentor = mentorMapper.mentorDtoToMentor(mentorDto);
             mentor.setTeamRegistration(teamRegistration);
@@ -46,13 +48,12 @@ public class MentorServiceImpl implements MentorService {
         } catch (BadRequestException | NotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new RuntimeException("Oooops. An unexpected error occurred.", e);
+            throw new RuntimeException("Oops. An unexpected error occurred.", e);
         }
     }
 
     public static class BadRequestException extends RuntimeException {
         public BadRequestException(String message) {
-
             super(message);
         }
     }
@@ -62,6 +63,4 @@ public class MentorServiceImpl implements MentorService {
             super(message);
         }
     }
-
-
 }

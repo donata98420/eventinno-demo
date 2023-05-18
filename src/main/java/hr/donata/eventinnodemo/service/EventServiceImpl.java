@@ -5,6 +5,7 @@ import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 @Service
+@Transactional
 public class EventServiceImpl implements EventService{
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
@@ -27,7 +29,6 @@ public class EventServiceImpl implements EventService{
     @Override
     public void create(EventDto eventDto) {
         try {
-
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
                 throw new BadRequestException("Sorry, this team name already exists.");
             }
@@ -40,18 +41,17 @@ public class EventServiceImpl implements EventService{
 
             Event event = eventMapper.eventDtoToEvent(eventDto);
             event = eventRepository.save(event);
+
             for (TeamRegistrationDto teamRegistrationDto : teamRegistrationDtos) {
                 teamRegistrationDto.setEventId(event.getId());
                 teamRegistrationService.create(teamRegistrationDto);
             }
-
-
         } catch (DataIntegrityViolationException e) {
             throw new BadRequestException("This event name already exists. Try with another one.");
         } catch (BadRequestException e) {
             throw e;
         } catch (Exception e) {
-            throw new RuntimeException("Oooops. An unexpected error occurred.", e);
+            throw new RuntimeException("Oops. An unexpected error occurred.", e);
         }
     }
 
@@ -66,5 +66,4 @@ public class EventServiceImpl implements EventService{
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }
-
 }

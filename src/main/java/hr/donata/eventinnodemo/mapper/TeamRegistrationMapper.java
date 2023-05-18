@@ -11,6 +11,7 @@ public interface TeamRegistrationMapper {
     TeamRegistrationMapper INSTANCE = Mappers.getMapper(TeamRegistrationMapper.class);
 
     @Mapping(source = "eventId", target = "event.id")
+    @Mapping(target = "mentors", ignore = true)
     TeamRegistration teamRegistrationDtoToTeamRegistration(TeamRegistrationDto teamRegistrationDto);
 
 

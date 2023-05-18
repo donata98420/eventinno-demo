@@ -20,7 +20,7 @@ public class Mentor {
     private String email;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teamRegstrationId")
+    @JoinColumn(name = "teamRegistrationId")
     private TeamRegistration teamRegistration;
 
 

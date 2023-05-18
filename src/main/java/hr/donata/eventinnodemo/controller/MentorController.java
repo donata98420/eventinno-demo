@@ -12,23 +12,21 @@ public class MentorController {
 
     private final MentorService mentorService;
     private final MentorMapper mentorMapper;
-//
-    public MentorController(MentorService mentorService, MentorMapper mentorMapper) {
 
+    public MentorController(MentorService mentorService, MentorMapper mentorMapper) {
         this.mentorService = mentorService;
         this.mentorMapper = mentorMapper;
     }
 
     @PostMapping(path = "/save")
-    public ResponseEntity<MentorDto> saveMentor(@RequestBody MentorDto mentorDto) {
+    private ResponseEntity<MentorDto> saveMentor(@RequestBody MentorDto mentorDto) {
         mentorService.create(mentorDto);
         return ResponseEntity.ok(mentorDto);
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteMentor(@PathVariable Long id) {
+    private ResponseEntity<String> deleteMentor(@PathVariable Long id) {
         mentorService.deleteMentor(id);
-        return ResponseEntity.ok("You deleted one mentor from database.");
+        return ResponseEntity.ok("You deleted one mentor from the database.");
     }
-
 }

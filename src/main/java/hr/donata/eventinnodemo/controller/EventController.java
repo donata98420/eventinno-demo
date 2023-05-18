@@ -15,16 +15,14 @@ public class EventController {
     }
 
     @PostMapping(path = "/save")
-    public ResponseEntity<EventDto> saveEvent(@RequestBody EventDto eventDto) {
+    private ResponseEntity<EventDto> saveEvent(@RequestBody EventDto eventDto) {
         eventService.create(eventDto);
         return ResponseEntity.ok(eventDto);
-
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteEvent(@PathVariable Long id) {
+    private ResponseEntity<String> deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
-        return ResponseEntity.ok("You deleted one event from database.");
+        return ResponseEntity.ok("You deleted one event from the database.");
     }
-
 }
