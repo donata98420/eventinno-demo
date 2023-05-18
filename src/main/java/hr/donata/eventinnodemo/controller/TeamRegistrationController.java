@@ -1,7 +1,6 @@
 package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
-import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.service.TeamRegistrationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +10,10 @@ import org.springframework.web.bind.annotation.*;
 public class TeamRegistrationController {
 
     private final TeamRegistrationService teamRegistrationService;
-    private final TeamRegistrationMapper teamRegistrationMapper;
 
-    public TeamRegistrationController(TeamRegistrationService teamRegistrationService, TeamRegistrationMapper teamRegistrationMapper) {
+    public TeamRegistrationController(TeamRegistrationService teamRegistrationService) {
         this.teamRegistrationService = teamRegistrationService;
-        this.teamRegistrationMapper = teamRegistrationMapper;
+
     }
 
     @PostMapping(path = "/save")

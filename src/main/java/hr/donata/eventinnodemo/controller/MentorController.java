@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public class MentorController {
 
     private final MentorService mentorService;
-    private final MentorMapper mentorMapper;
 
-    public MentorController(MentorService mentorService, MentorMapper mentorMapper) {
+    public MentorController(MentorService mentorService) {
         this.mentorService = mentorService;
-        this.mentorMapper = mentorMapper;
+
     }
 
     @PostMapping(path = "/save")
