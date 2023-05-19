@@ -66,7 +66,6 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
         teamRegistrationRepository.deleteById(id);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class BadRequestException extends IllegalArgumentException {
         public BadRequestException(String message) {
             super(message);
