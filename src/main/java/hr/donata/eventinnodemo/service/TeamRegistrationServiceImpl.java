@@ -10,13 +10,11 @@ import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
 @Service
-@Transactional
 public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     private final TeamRegistrationRepository teamRegistrationRepository;
     private final TeamRegistrationMapper teamRegistrationMapper;
