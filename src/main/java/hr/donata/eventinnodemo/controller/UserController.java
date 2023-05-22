@@ -5,10 +5,7 @@ import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.UserDto;
 import hr.donata.eventinnodemo.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +21,12 @@ public class UserController {
     private ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
         userService.create(userDto);
         return ResponseEntity.ok(userDto);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    private ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("You deleted one user from the database.");
     }
 
 
