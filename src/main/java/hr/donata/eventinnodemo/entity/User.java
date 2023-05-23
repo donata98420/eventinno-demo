@@ -1,4 +1,5 @@
-import jakarta.persistence.*;
+import hr.donata.eventinnodemo.entity.Registration;
+import hr.donata.eventinnodemo.entity.TeamRegistration;
 import jakarta.persistence.*;
 import javax.lang.model.element.Name;
 import java.util.List;
@@ -129,4 +130,7 @@ public class User {
 
     private class Education {
     }
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    private List<Registration> registrationList;
 }

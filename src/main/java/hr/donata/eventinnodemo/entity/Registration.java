@@ -12,7 +12,6 @@ import java.util.UUID;
 @Table(name = "registrations")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Registration {
 

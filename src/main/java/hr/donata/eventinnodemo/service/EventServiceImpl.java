@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,6 +35,17 @@ public class EventServiceImpl implements EventService{
                 throw new BadRequestException("Sorry, this team name already exists.");
             }
 
+            if (eventDto.getRegistrationsNotBefore() != null && eventDto.getRegistrationsNotAfter() != null) {
+
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime registrationsNotBefore = eventDto.getRegistrationsNotBefore().toLocalDateTime();
+                LocalDateTime registrationsNotAfter = eventDto.getRegistrationsNotAfter().toLocalDateTime();
+
+                if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
+                    throw new BadRequestException("Sorry, registrations for this event are currently not open.");
+                }
+            }
+
             List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
 
             if (teamRegistrationDtos.stream().map(TeamRegistrationDto::getName).distinct().count() != teamRegistrationDtos.size()) {
@@ -54,7 +67,6 @@ public class EventServiceImpl implements EventService{
             throw new RuntimeException("Oops. An unexpected error occurred.", e);
         }
     }
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class BadRequestException extends IllegalArgumentException {
         public BadRequestException(String message) {
