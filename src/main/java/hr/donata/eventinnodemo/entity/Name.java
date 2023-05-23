@@ -1,9 +1,9 @@
-import jakarta.persistence.Embeddable;
+package hr.donata.eventinnodemo.entity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Embeddable
 @Entity
 @Table(name = "name")
 public class Name {

@@ -1,11 +1,10 @@
-import hr.donata.eventinnodemo.entity.Registration;
-import hr.donata.eventinnodemo.entity.TeamRegistration;
+package hr.donata.eventinnodemo.entity;
+
 import jakarta.persistence.*;
-import javax.lang.model.element.Name;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "userss")
 public class User {
 
     @Id
@@ -128,9 +127,9 @@ public class User {
         this.preferredOS = preferredOS;
     }
 
-    private class Education {
-    }
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
     private List<Registration> registrationList;
+
+
 }

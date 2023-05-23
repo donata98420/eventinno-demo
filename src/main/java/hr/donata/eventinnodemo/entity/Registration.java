@@ -3,9 +3,7 @@ package hr.donata.eventinnodemo.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.UUID;
 
 @Entity
@@ -22,6 +20,8 @@ public class Registration {
     @Column(name = "uuid", unique = true, nullable = false)
     private UUID uuid;
 
+    @ManyToOne
+    private User user;
 
     public Registration() {
         this.uuid = UUID.randomUUID();
