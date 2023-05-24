@@ -27,6 +27,7 @@ public class NameServiceImpl implements NameService {
     }
     @Override
     public void deleteName(Long id) {
+        nameRepository.deleteById(id);
 
     }
 }

@@ -60,6 +60,7 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
 
     @Override
     public void deleteTeamRegistration(Long id) {
+
         teamRegistrationRepository.deleteById(id);
     }
 

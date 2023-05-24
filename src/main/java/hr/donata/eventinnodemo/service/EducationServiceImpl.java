@@ -23,6 +23,7 @@ public class EducationServiceImpl implements EducationService {
 
     @Override
     public void deleteEducation(Long id) {
+        educationRepository.deleteById(id);
 
     }
 
