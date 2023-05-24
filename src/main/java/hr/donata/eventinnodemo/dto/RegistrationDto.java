@@ -1,7 +1,10 @@
 package hr.donata.eventinnodemo.dto;
 
+import lombok.Data;
+
 import java.util.UUID;
 
+@Data
 public class RegistrationDto {
     private Long id;
     private UUID uuid;
