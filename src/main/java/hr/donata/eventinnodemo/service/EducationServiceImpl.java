@@ -10,12 +10,10 @@ public class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
     private final EducationMapper educationMapper;
-    private final EducationService educationService;
 
-    public EducationServiceImpl(EducationRepository educationRepository, EducationMapper educationMapper, EducationService educationService) {
+    public EducationServiceImpl(EducationRepository educationRepository, EducationMapper educationMapper) {
         this.educationRepository = educationRepository;
         this.educationMapper = educationMapper;
-        this.educationService = educationService;
     }
 
     @Override
