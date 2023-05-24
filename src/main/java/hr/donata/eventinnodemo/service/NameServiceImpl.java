@@ -10,12 +10,11 @@ public class NameServiceImpl implements NameService {
 
     private final NameRepository nameRepository;
     private final NameMapper nameMapper;
-    private final NameService nameService;
 
-    public NameServiceImpl(NameRepository nameRepository, NameMapper nameMapper, NameService nameService) {
+
+    public NameServiceImpl(NameRepository nameRepository, NameMapper nameMapper) {
         this.nameRepository = nameRepository;
         this.nameMapper = nameMapper;
-        this.nameService = nameService;
     }
 
     @Override
