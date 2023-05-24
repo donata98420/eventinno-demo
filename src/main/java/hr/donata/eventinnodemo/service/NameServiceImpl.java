@@ -19,7 +19,6 @@ public class NameServiceImpl implements NameService {
         this.nameService = nameService;
     }
 
-
     @Override
     public void create(NameDto nameDto) {
 
