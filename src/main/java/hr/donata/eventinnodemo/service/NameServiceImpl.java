@@ -1,6 +1,8 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.NameDto;
+import hr.donata.eventinnodemo.entity.Name;
+import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.NameMapper;
 import hr.donata.eventinnodemo.repository.NameRepository;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class NameServiceImpl implements NameService {
 
     @Override
     public void create(NameDto nameDto) {
+        Name name = nameMapper.nameDtoToName(nameDto);
+        nameRepository.save(name);
 
     }
     @Override
