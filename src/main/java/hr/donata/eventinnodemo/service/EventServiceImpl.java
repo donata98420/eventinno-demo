@@ -64,7 +64,9 @@ public class EventServiceImpl implements EventService{
         } catch (DataIntegrityViolationException e) {
             throw new BadRequestException("This event name already exists. Try with another one.");
         } catch (BadRequestException e) {
+
             throw e;
+
         } catch (Exception e) {
             throw new RuntimeException("Oops. An unexpected error occurred.", e);
         }
