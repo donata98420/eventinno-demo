@@ -4,7 +4,6 @@ import hr.donata.eventinnodemo.dto.EducationDto;
 import hr.donata.eventinnodemo.service.EducationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/education")
 public class EducationController {
