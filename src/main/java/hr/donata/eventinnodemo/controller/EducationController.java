@@ -1,7 +1,6 @@
 package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.EducationDto;
-import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.service.EducationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/education")
 public class EducationController {
     private final EducationService educationService;
-
     public EducationController(EducationService educationService) {
         this.educationService = educationService;
     }
@@ -20,7 +18,6 @@ public class EducationController {
         educationService.create(educationDto);
         return ResponseEntity.ok(educationDto);
     }
-
     @DeleteMapping(path = "/delete/{id}")
     private ResponseEntity<String> deleteEducation(@PathVariable Long id) {
         educationService.deleteEducation(id);
