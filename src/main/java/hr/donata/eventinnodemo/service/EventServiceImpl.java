@@ -9,10 +9,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.server.MethodNotAllowedException;
 
 @Service
 @Transactional
@@ -27,8 +29,8 @@ public class EventServiceImpl implements EventService{
         this.teamRegistrationService = teamRegistrationService;
     }
 
-
     @Override
+    @RequestMapping(value = "/events", method = RequestMethod.POST)
     public void create(EventDto eventDto) {
         try {
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
@@ -42,14 +44,14 @@ public class EventServiceImpl implements EventService{
                 LocalDateTime registrationsNotAfter = eventDto.getRegistrationsNotAfter().toLocalDateTime();
 
                 if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
-                    throw new BadRequestException("Sorry, registrations for this event are currently not open.");
+                    throw new MethodNotAllowedException("Registrations for this event are currently closed.", eventDto.getName());
                 }
             }
 
             List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
 
             if (teamRegistrationDtos.stream().map(TeamRegistrationDto::getName).distinct().count() != teamRegistrationDtos.size()) {
-                throw new BadRequestException("Multiple teams have the same name.");
+                throw new BadRequestException("Sorry, multiple teams have the same name.");
             }
 
             Event event = eventMapper.eventDtoToEvent(eventDto);
@@ -74,8 +76,17 @@ public class EventServiceImpl implements EventService{
         }
     }
 
+    // if event does not accept registrations
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public static class MethodNotAllowedException extends RuntimeException {
+        public MethodNotAllowedException(String message, String eventName) {
+            super(message + " Event: " + eventName);
+        }
+    }
+
     @Override
     public void deleteEvent(Long id) {
+
         eventRepository.deleteById(id);
     }
 }

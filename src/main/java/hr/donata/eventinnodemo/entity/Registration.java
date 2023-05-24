@@ -19,7 +19,7 @@ public class Registration {
 
     @Column(name = "uuid", unique = true, nullable = false)
     private UUID uuid;
-    
+
     @ManyToOne
     private User user;
 
