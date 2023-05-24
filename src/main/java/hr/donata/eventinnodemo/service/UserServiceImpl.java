@@ -1,6 +1,8 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.UserDto;
+import hr.donata.eventinnodemo.entity.Registration;
+import hr.donata.eventinnodemo.entity.User;
 import hr.donata.eventinnodemo.mapper.UserMapper;
 import hr.donata.eventinnodemo.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void create(UserDto userDto) {
+        User user = userMapper.userDtoToUser(userDto);
+        userRepository.save(user);
 
     }
     @Override
