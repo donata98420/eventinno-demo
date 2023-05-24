@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class EducationController {
     private final EducationService educationService;
     public EducationController(EducationService educationService) {
+
         this.educationService = educationService;
     }
 

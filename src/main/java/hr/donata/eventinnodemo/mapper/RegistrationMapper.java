@@ -9,7 +9,6 @@ import org.mapstruct.factory.Mappers;
 public interface RegistrationMapper {
 
     RegistrationMapper INSTANCE = Mappers.getMapper(RegistrationMapper.class);
-
     Registration registrationDtoToRegistration(RegistrationDto registrationDto);
 
 

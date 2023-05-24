@@ -1,6 +1,5 @@
 package hr.donata.eventinnodemo.controller;
 
-import hr.donata.eventinnodemo.dto.EducationDto;
 import hr.donata.eventinnodemo.dto.NameDto;
 import hr.donata.eventinnodemo.service.NameService;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ public class NameController {
     private final NameService nameService;
 
     public NameController(NameService nameService) {
+
         this.nameService = nameService;
     }
 
