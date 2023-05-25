@@ -24,6 +24,6 @@ public class NameController {
     @DeleteMapping(path = "/delete/{id}")
     private ResponseEntity<String> deleteName(@PathVariable Long id) {
         nameService.deleteName(id);
-        return ResponseEntity.ok("You deleted one name from the database.");
+        return ResponseEntity.ok("You deleted one full name from the database.");
     }
 }

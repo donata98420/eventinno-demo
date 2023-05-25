@@ -1,5 +1,7 @@
 package hr.donata.eventinnodemo.mapper;
 
+import hr.donata.eventinnodemo.dto.EducationDto;
+import hr.donata.eventinnodemo.entity.Education;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -7,4 +9,5 @@ import org.mapstruct.factory.Mappers;
 public interface EducationMapper {
 
     EducationMapper INSTANCE = Mappers.getMapper(EducationMapper.class);
+    Education educationDtoToEducation(EducationDto educationDto);
 }

@@ -2,7 +2,6 @@ package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.NameDto;
 import hr.donata.eventinnodemo.entity.Name;
-import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.NameMapper;
 import hr.donata.eventinnodemo.repository.NameRepository;
 import org.springframework.stereotype.Service;
