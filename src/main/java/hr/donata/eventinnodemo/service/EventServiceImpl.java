@@ -39,8 +39,8 @@ public class EventServiceImpl implements EventService{
             if (eventDto.getRegistrationsNotBefore() != null && eventDto.getRegistrationsNotAfter() != null) {
 
                 LocalDateTime now = LocalDateTime.now();
-                LocalDateTime registrationsNotBefore = eventDto.getRegistrationsNotBefore().toLocalDateTime();
-                LocalDateTime registrationsNotAfter = eventDto.getRegistrationsNotAfter().toLocalDateTime();
+                LocalDateTime registrationsNotBefore = eventDto.getRegistrationsNotBefore();
+                LocalDateTime registrationsNotAfter = eventDto.getRegistrationsNotAfter();
 
                 if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
                     throw new MethodNotAllowedException("Registrations for this event are currently closed.", eventDto.getName());

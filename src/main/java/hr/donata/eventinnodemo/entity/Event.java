@@ -26,10 +26,10 @@ public class Event {
     private Byte maxParticipants;
 
     @Column(name ="registrationsNotAfter")
-    private ZonedDateTime registrationsNotAfter;
+    private LocalDateTime registrationsNotAfter;
 
     @Column(name ="confirmationNotAfter")
-    private ZonedDateTime confirmationNotAfter;
+    private LocalDateTime confirmationNotAfter;
 
     @Column(name ="registrationsNotBefore")
     private LocalDateTime registrationsNotBefore;
