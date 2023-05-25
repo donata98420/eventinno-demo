@@ -19,6 +19,7 @@ public class EventDto {
     private LocalDate startDate;
     private Long weeks;
     private List<TeamRegistrationDto> teams;
+
 }
 
 
