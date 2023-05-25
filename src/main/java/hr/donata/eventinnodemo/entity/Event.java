@@ -25,6 +25,7 @@ public class Event {
     @Column(name ="maxParticipant")
     private Byte maxParticipants;
 
+    //
     @Column(name ="registrationsNotAfter")
     private LocalDateTime registrationsNotAfter;
 
