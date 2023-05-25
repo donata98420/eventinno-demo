@@ -1,34 +1,18 @@
 package hr.donata.eventinnodemo.dto;
-
 import lombok.Data;
 
 @Data
 public class NameDto {
-    private String first;
-    private String last;
-    private Long id;
+    private String firstName;
+    private String lastName;
 
-    public String getFirst() {
-        return first;
-    }
-
-    public void setFirst(String first) {
-        this.first = first;
-    }
-
-    public String getLast() {
-        return last;
-    }
-
-    public void setLast(String last) {
-        this.last = last;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public NameDto(String fullName) {
+        String[] names = fullName.split(" ");
+        if (names.length > 0) {
+            this.firstName = names[0];
+        }
+        if (names.length > 1) {
+            this.lastName = names[1];
+        }
     }
 }
