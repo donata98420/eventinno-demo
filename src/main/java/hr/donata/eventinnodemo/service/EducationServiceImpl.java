@@ -4,18 +4,15 @@ import hr.donata.eventinnodemo.dto.EducationDto;
 import hr.donata.eventinnodemo.entity.Education;
 import hr.donata.eventinnodemo.mapper.EducationMapper;
 import hr.donata.eventinnodemo.repository.EducationRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
     private final EducationMapper educationMapper;
-
-    public EducationServiceImpl(EducationRepository educationRepository, EducationMapper educationMapper) {
-        this.educationRepository = educationRepository;
-        this.educationMapper = educationMapper;
-    }
 
     @Override
     public void create(EducationDto educationDto) {

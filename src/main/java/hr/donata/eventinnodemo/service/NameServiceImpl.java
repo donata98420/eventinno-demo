@@ -4,19 +4,16 @@ import hr.donata.eventinnodemo.dto.NameDto;
 import hr.donata.eventinnodemo.entity.Name;
 import hr.donata.eventinnodemo.mapper.NameMapper;
 import hr.donata.eventinnodemo.repository.NameRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class NameServiceImpl implements NameService {
 
     private final NameRepository nameRepository;
     private final NameMapper nameMapper;
 
-
-    public NameServiceImpl(NameRepository nameRepository, NameMapper nameMapper) {
-        this.nameRepository = nameRepository;
-        this.nameMapper = nameMapper;
-    }
 
     @Override
     public void create(NameDto nameDto) {

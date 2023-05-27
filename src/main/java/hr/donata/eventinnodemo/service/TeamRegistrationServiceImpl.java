@@ -8,27 +8,19 @@ import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     private final TeamRegistrationRepository teamRegistrationRepository;
     private final TeamRegistrationMapper teamRegistrationMapper;
     private final EventRepository eventRepository;
     private final MentorService mentorService;
-
-    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository,
-                                       TeamRegistrationMapper teamRegistrationMapper,
-                                       EventRepository eventRepository,
-                                       MentorService mentorService) {
-        this.teamRegistrationRepository = teamRegistrationRepository;
-        this.teamRegistrationMapper = teamRegistrationMapper;
-        this.eventRepository = eventRepository;
-        this.mentorService = mentorService;
-    }
 
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
