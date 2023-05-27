@@ -5,6 +5,7 @@ import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,17 +17,12 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class EventServiceImpl implements EventService{
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final TeamRegistrationService teamRegistrationService;
-
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, TeamRegistrationService teamRegistrationService) {
-        this.eventRepository = eventRepository;
-        this.eventMapper = eventMapper;
-        this.teamRegistrationService = teamRegistrationService;
-    }
 
     @Override
     @RequestMapping(value = "/events", method = RequestMethod.POST)
