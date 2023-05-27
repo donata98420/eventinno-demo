@@ -16,7 +16,7 @@ public class TeamRegistrationController {
 
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "")
     private ResponseEntity<TeamRegistrationDto> saveTeamRegistration(@RequestBody TeamRegistrationDto teamRegistrationDto) {
         teamRegistrationService.create(teamRegistrationDto);
         return ResponseEntity.ok(teamRegistrationDto);

@@ -17,7 +17,7 @@ public class MentorController {
 
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "")
     private ResponseEntity<MentorDto> saveMentor(@RequestBody MentorDto mentorDto) {
         mentorService.create(mentorDto);
         return ResponseEntity.ok(mentorDto);

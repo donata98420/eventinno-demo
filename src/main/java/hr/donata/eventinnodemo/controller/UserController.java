@@ -15,7 +15,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "")
     private ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
         userService.create(userDto);
         return ResponseEntity.ok(userDto);
