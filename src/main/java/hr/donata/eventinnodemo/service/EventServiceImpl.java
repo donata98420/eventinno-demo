@@ -68,8 +68,14 @@ public class EventServiceImpl implements EventService{
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class BadRequestException extends IllegalArgumentException {
-        public BadRequestException(String message) {
+        private String errorMessage;
+
+        public BadRequestException(String message, String errorMessage) {
             super(message);
+            this.errorMessage = errorMessage;
+        }
+        public String getErrorMessage() {
+            return errorMessage;
         }
     }
 
