@@ -14,7 +14,7 @@ public class RegistrationController {
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
-    @PostMapping(path = "")
+    @PostMapping(path = "/event/<event_id>/registrations")
     private ResponseEntity<RegistrationDto> saveRegistration(@RequestBody RegistrationDto registrationDto) {
         registrationService.create(registrationDto);
         return ResponseEntity.ok(registrationDto);
