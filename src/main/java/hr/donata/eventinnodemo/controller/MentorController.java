@@ -22,7 +22,6 @@ public class MentorController {
         mentorService.create(mentorDto);
         return ResponseEntity.ok(mentorDto);
     }
-
     @DeleteMapping(path = "/delete/{id}")
     private ResponseEntity<String> deleteMentor(@PathVariable Long id) {
         mentorService.deleteMentor(id);

@@ -20,7 +20,6 @@ public class NameController {
         nameService.create(nameDto);
         return ResponseEntity.ok(nameDto);
     }
-
     @DeleteMapping(path = "/delete/{id}")
     private ResponseEntity<String> deleteName(@PathVariable Long id) {
         nameService.deleteName(id);

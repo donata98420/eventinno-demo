@@ -13,7 +13,6 @@ public class TeamRegistrationController {
 
     public TeamRegistrationController(TeamRegistrationService teamRegistrationService) {
         this.teamRegistrationService = teamRegistrationService;
-
     }
 
     @PostMapping(path = "")
