@@ -33,7 +33,7 @@ public class EventServiceImpl implements EventService{
     public void create(EventDto eventDto) {
         try {
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
-                throw new BadRequestException("Sorry, this team name already exists.");
+                throw new BadRequestException("Sorry, event with this name already exists.");
             }
 
             if (eventDto.getRegistrationsNotBefore() != null && eventDto.getRegistrationsNotAfter() != null) {
