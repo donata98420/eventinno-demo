@@ -25,22 +25,14 @@ public class EventServiceImpl implements EventService {
     private final TeamRegistrationService teamRegistrationService;
 
     @Override
-    @RequestMapping(value = "/events", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public void create(EventDto eventDto) {
         try {
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
                 throw new BadRequestException("Sorry, this event name already exists. Use another one.");
             }
 
-            if (eventDto.getRegistrationsNotBefore() != null && eventDto.getRegistrationsNotAfter() != null) {
-                LocalDateTime now = LocalDateTime.now();
-                LocalDateTime registrationsNotBefore = eventDto.getRegistrationsNotBefore();
-                LocalDateTime registrationsNotAfter = eventDto.getRegistrationsNotAfter();
 
-                if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
-                    throw new MethodNotAllowedException("Registrations for this event are currently closed.", eventDto.getName());
-                }
-            }
 
             List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
 
@@ -72,6 +64,7 @@ public class EventServiceImpl implements EventService {
         }
 
         public String getErrorMessage() {
+
             return errorMessage;
         }
     }
@@ -86,6 +79,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEvent(Long id) {
+
         eventRepository.deleteById(id);
     }
 }
