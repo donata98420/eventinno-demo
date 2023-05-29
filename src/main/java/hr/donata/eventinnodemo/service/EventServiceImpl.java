@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Service
@@ -72,8 +72,9 @@ public class EventServiceImpl implements EventService {
     // If event does not accept registrations
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public static class MethodNotAllowedException extends RuntimeException {
-        public MethodNotAllowedException(String message, String eventName) {
-            super(message + " Event: " + eventName);
+        private String name;
+        public MethodNotAllowedException(String message, String name) {
+            super(message + " Event: " + name);
         }
     }
 
