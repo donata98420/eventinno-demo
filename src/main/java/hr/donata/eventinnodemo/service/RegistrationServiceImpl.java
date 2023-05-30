@@ -39,6 +39,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             }
         }
 
+        registrationDto.setUuid(UUID.randomUUID());
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
         registrationRepository.save(registration);
 
