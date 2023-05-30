@@ -10,16 +10,17 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class NameServiceImpl implements NameService {
-
     private final NameRepository nameRepository;
     private final NameMapper nameMapper;
 
-
     @Override
     public void create(NameDto nameDto) {
+        if (nameRepository.findByNameOfUser(nameDto.getNameOfUser()).isPresent()) {
+            throw new EventServiceImpl.BadRequestException("Sorry, this name already exists. Try with another one.");
+        }
+
         Name name = nameMapper.nameDtoToName(nameDto);
         nameRepository.save(name);
-
     }
     @Override
     public void deleteName(Long id) {

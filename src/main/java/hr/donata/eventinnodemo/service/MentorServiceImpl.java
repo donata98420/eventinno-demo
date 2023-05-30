@@ -30,6 +30,9 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public void create(MentorDto mentorDto) {
+        if (mentorRepository.findByEmail(mentorDto.getEmail()).isPresent()) {
+            throw new EventServiceImpl.BadRequestException("Sorry, this mentor already exists. Try with another one.");
+        }
 
         TeamRegistration teamRegistration = teamRegistrationRepository.findById(mentorDto.getTeamRegistrationId())
                 .orElseThrow(() -> new NotFoundException("Team registration is not found."));

@@ -15,4 +15,12 @@ public class NameDto {
             this.lastName = names[1];
         }
     }
+
+    public Object getNameOfUser() {
+        return nameOfUser;
+    }
+
+    public void setNameOfUser(Object nameOfUser) {
+        this.nameOfUser = nameOfUser;
+    }
 }
