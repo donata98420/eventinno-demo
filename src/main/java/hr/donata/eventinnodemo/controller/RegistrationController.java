@@ -6,15 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/registration")
+@RequestMapping("/event/{event_id}/registrations")
 public class RegistrationController {
-
     private final RegistrationService registrationService;
-
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
-    @PostMapping(path = "/event/<event_id>/registrations")
+    @PostMapping(path = "")
     private ResponseEntity<RegistrationDto> saveRegistration(@RequestBody RegistrationDto registrationDto) {
         registrationService.create(registrationDto);
         return ResponseEntity.ok(registrationDto);
