@@ -2,6 +2,7 @@ package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.UserDto;
 import hr.donata.eventinnodemo.service.UserService;
+import hr.donata.eventinnodemo.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class UserController {
     }
 
     @PostMapping(path = "")
-    private ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
+    private ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) throws UserServiceImpl.DuplicateUserException {
         userService.create(userDto);
         return ResponseEntity.ok(userDto);
     }
