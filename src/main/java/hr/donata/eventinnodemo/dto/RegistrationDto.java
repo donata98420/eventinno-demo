@@ -1,49 +1,58 @@
 package hr.donata.eventinnodemo.dto;
 
 import lombok.Data;
-import java.time.LocalDateTime;
+
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.UUID;
 
 @Data
 public class RegistrationDto {
-    private Long id;
     private UUID uuid;
-    private UserDto user;
-    private LocalDateTime registrationsNotBefore;
-    private LocalDateTime registrationsNotAfter;
+    private PersonalDto personal;
+    private ExperienceDto experience;
+    private String motivation;
+    private String preferredOS;
 
-    public Long getId() {
-        return id;
+    public ChronoLocalDateTime<?> getRegistrationsNotBefore() {
+
+        return null;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public ChronoLocalDateTime<?> getRegistrationsNotAfter() {
+
+        return null;
     }
 
-
-    public UserDto getUser() {
-        return user;
+    public void setUuid(UUID randomUUID) {
+        this.uuid = randomUUID;
     }
 
-    public void setUser(UserDto user) {
-        this.user = user;
+    @Data
+    public static class PersonalDto {
+        private NameDto name;
+        private String email;
+        private String phone;
+        private EducationDto education;
+        private String summary;
     }
 
-
-    public LocalDateTime getRegistrationsNotBefore() {
-        
-        return registrationsNotBefore;
+    @Data
+    public static class NameDto {
+        private String first;
+        private String last;
     }
 
-    public void setRegistrationsNotBefore(LocalDateTime registrationsNotBefore) {
-        this.registrationsNotBefore = registrationsNotBefore;
+    @Data
+    public static class EducationDto {
+        private String faculty;
+        private int year;
     }
 
-    public LocalDateTime getRegistrationsNotAfter() {
-        return registrationsNotAfter;
-    }
-
-    public void setRegistrationsNotAfter(LocalDateTime registrationsNotAfter) {
-        this.registrationsNotAfter = registrationsNotAfter;
+    @Data
+    public static class ExperienceDto {
+        private int years;
+        private String[] skills;
+        private String repositoryUrl;
+        private String summary;
     }
 }
