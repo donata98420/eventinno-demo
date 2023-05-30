@@ -27,13 +27,13 @@ public class Event {
 
     //
     @Column(name ="registrationsNotAfter")
-    private LocalDateTime registrationsNotAfter;
+    private LocalDate registrationsNotAfter;
 
     @Column(name ="confirmationNotAfter")
-    private LocalDateTime confirmationNotAfter;
+    private String confirmationNotAfter;
 
     @Column(name ="registrationsNotBefore")
-    private LocalDateTime registrationsNotBefore;
+    private String registrationsNotBefore;
 
     @Column(name ="startDate")
     private LocalDate startDate;
