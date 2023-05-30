@@ -1,7 +1,6 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.EventDto;
-import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
@@ -10,11 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.util.List;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -25,27 +22,31 @@ public class EventServiceImpl implements EventService {
     private final TeamRegistrationService teamRegistrationService;
 
     @Override
-    @RequestMapping(value = "", method = RequestMethod.POST)
     public void create(EventDto eventDto) {
         try {
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
                 throw new BadRequestException("Sorry, this event name already exists. Use another one.");
             }
 
+            // Converting
+            String registrationsNotAfterString = eventDto.getRegistrationsNotAfter()
+                    .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            String confirmationNotAfterString = eventDto.getConfirmationNotAfter()
+                    .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            String registrationsNotBeforeString = eventDto.getRegistrationsNotBefore()
+                    .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
 
-            List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
-
-            if (teamRegistrationDtos.stream().map(TeamRegistrationDto::getName).distinct().count() != teamRegistrationDtos.size()) {
-                throw new BadRequestException("Sorry, multiple teams have the same name.");
-            }
-
+            // Creating Event
             Event event = eventMapper.eventDtoToEvent(eventDto);
+            event.setRegistrationsNotAfter(ZonedDateTime.parse(registrationsNotAfterString));
+            event.setConfirmationNotAfter(ZonedDateTime.parse(confirmationNotAfterString));
+            event.setRegistrationsNotBefore(ZonedDateTime.parse(registrationsNotBeforeString));
+
+            // Saving event
             event = eventRepository.save(event);
 
-            for (TeamRegistrationDto teamRegistrationDto : teamRegistrationDtos) {
-                teamRegistrationDto.setEventId(event.getId());
-                teamRegistrationService.create(teamRegistrationDto);
-            }
+            // Saving TeamRegistration
+            teamRegistrationService.save(eventDto.getTeams(), event);
         } catch (DataIntegrityViolationException e) {
             throw new RuntimeException("This event name already exists. Try with another one.", e);
         } catch (Exception e) {
@@ -53,24 +54,15 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public static class BadRequestException extends IllegalArgumentException {
-        private String errorMessage;
-
-        public BadRequestException(String message) {
-            super(message);
-            this.errorMessage = errorMessage;
-        }
-
-        public String getErrorMessage() {
-
-            return errorMessage;
-        }
-    }
-
     @Override
     public void deleteEvent(Long id) {
-
         eventRepository.deleteById(id);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class BadRequestException extends IllegalArgumentException {
+        public BadRequestException(String message) {
+            super(message);
+        }
     }
 }
