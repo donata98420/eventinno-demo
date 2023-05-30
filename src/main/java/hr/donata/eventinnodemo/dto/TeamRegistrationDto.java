@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 public class TeamRegistrationDto {
-
+    private Long id;
     private String name;
     //
     private List<MentorDto> mentors = new ArrayList<>();
