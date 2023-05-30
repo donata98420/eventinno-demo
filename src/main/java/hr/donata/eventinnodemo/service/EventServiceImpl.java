@@ -33,7 +33,6 @@ public class EventServiceImpl implements EventService {
             }
 
 
-
             List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
 
             if (teamRegistrationDtos.stream().map(TeamRegistrationDto::getName).distinct().count() != teamRegistrationDtos.size()) {
@@ -66,15 +65,6 @@ public class EventServiceImpl implements EventService {
         public String getErrorMessage() {
 
             return errorMessage;
-        }
-    }
-
-    // If event does not accept registrations
-    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    public static class MethodNotAllowedException extends RuntimeException {
-        private String name;
-        public MethodNotAllowedException(String message, String name) {
-            super(message + " Event: " + name);
         }
     }
 

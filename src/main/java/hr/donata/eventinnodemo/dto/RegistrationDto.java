@@ -7,7 +7,6 @@ import java.util.UUID;
 @Data
 public class RegistrationDto {
     private Long id;
-    private UUID uuid;
     private UserDto user;
     private LocalDateTime registrationsNotBefore;
     private LocalDateTime registrationsNotAfter;
@@ -20,13 +19,9 @@ public class RegistrationDto {
         this.id = id;
     }
 
-    public UUID getUuid() {
-        return uuid;
-    }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
+
+
 
     public UserDto getUser() {
         return user;

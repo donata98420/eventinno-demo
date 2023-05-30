@@ -13,7 +13,7 @@ public class EducationController {
         this.educationService = educationService;
     }
 
-    @PostMapping(path = "")
+    @PostMapping
     private ResponseEntity<EducationDto> saveEducation(@RequestBody EducationDto educationDto) {
         educationService.create(educationDto);
         return ResponseEntity.ok(educationDto);

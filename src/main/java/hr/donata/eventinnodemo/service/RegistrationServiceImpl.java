@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -40,6 +41,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
         registrationRepository.save(registration);
+
     }
 
     @Override
