@@ -14,7 +14,7 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @PostMapping(path = "")
+    @PostMapping(path = "/save")
     private ResponseEntity<EventDto> saveEvent(@RequestBody EventDto eventDto) {
         eventService.create(eventDto);
         return ResponseEntity.ok(eventDto);

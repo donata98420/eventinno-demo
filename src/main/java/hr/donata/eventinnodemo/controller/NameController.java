@@ -15,7 +15,7 @@ public class NameController {
         this.nameService = nameService;
     }
 
-    @PostMapping(path = "")
+    @PostMapping(path = "/save")
     private ResponseEntity<NameDto> saveName(@RequestBody NameDto nameDto) {
         nameService.create(nameDto);
         return ResponseEntity.ok(nameDto);
