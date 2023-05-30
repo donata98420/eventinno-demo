@@ -10,6 +10,7 @@ public class Name {
 
     private String first;
     private String last;
+    private Long oib;
     @Id
     private Long id;
 
