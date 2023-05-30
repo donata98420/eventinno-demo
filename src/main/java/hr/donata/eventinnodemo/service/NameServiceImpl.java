@@ -7,7 +7,6 @@ import hr.donata.eventinnodemo.repository.NameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static org.springframework.util.ClassUtils.isPresent;
 
 @Service
 @RequiredArgsConstructor
@@ -17,19 +16,16 @@ public class NameServiceImpl implements NameService {
 
     @Override
     public void create(NameDto nameDto) {
-        //first name
-        if (nameRepository.findByFirstName(nameDto.getFirstName()).isPresent()) {
-            throw new EventServiceImpl.BadRequestException("Sorry, this first name already exists. Try with another one.");
-        }
 
         Name name = nameMapper.nameDtoToName(nameDto);
         nameRepository.save(name);
 
+        }
 
-    }
-    @Override
-    public void deleteName(Long id) {
-        nameRepository.deleteById(id);
+        @Override
+        public void deleteName (Long id) {
+            nameRepository.deleteById(id);
 
+        }
     }
-}
+
