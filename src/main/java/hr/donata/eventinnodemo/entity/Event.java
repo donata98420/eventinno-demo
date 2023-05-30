@@ -2,6 +2,8 @@ package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -30,10 +32,10 @@ public class Event {
     private LocalDate registrationsNotAfter;
 
     @Column(name ="confirmationNotAfter")
-    private String confirmationNotAfter;
+    private LocalDate confirmationNotAfter;
 
     @Column(name ="registrationsNotBefore")
-    private String registrationsNotBefore;
+    private LocalDate registrationsNotBefore;
 
     @Column(name ="startDate")
     private LocalDate startDate;
