@@ -8,8 +8,24 @@ import jakarta.persistence.Table;
 @Table(name = "name")
 public class Name {
 
-    private String first;
-    private String last;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private String firstName;
+    private String lastName;
 
     public Long getOib() {
         return oib;
@@ -24,21 +40,6 @@ public class Name {
     @Id
     private Long id;
 
-    public String getFirst() {
-        return first;
-    }
-
-    public void setFirst(String first) {
-        this.first = first;
-    }
-
-    public String getLast() {
-        return last;
-    }
-
-    public void setLast(String last) {
-        this.last = last;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -47,4 +48,5 @@ public class Name {
     public Long getId() {
         return id;
     }
+
 }
