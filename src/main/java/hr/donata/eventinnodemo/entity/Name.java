@@ -10,7 +10,17 @@ public class Name {
 
     private String first;
     private String last;
+
+    public Long getOib() {
+        return oib;
+    }
+
+    public void setOib(Long oib) {
+        this.oib = oib;
+    }
+
     private Long oib;
+
     @Id
     private Long id;
 
