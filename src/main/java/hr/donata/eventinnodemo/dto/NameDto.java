@@ -5,6 +5,8 @@ import lombok.Data;
 public class NameDto {
     private String firstName;
     private String lastName;
+    private Long oib;
+
 
     public NameDto(String fullName) {
         String[] names = fullName.split(" ");
@@ -16,11 +18,5 @@ public class NameDto {
         }
     }
 
-    public Object getNameOfUser() {
-        return nameOfUser;
-    }
 
-    public void setNameOfUser(Object nameOfUser) {
-        this.nameOfUser = nameOfUser;
-    }
 }
