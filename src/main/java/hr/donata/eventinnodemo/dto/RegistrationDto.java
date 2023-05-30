@@ -2,6 +2,7 @@ package hr.donata.eventinnodemo.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.UUID;
 
@@ -15,12 +16,14 @@ public class RegistrationDto {
 
     public ChronoLocalDateTime<?> getRegistrationsNotBefore() {
 
-        return null;
+        LocalDateTime notBeforeDateTime = LocalDateTime.of(2023, 6, 1, 0, 0); // Replace with your desired date and time
+        return ChronoLocalDateTime.from(notBeforeDateTime);
     }
 
     public ChronoLocalDateTime<?> getRegistrationsNotAfter() {
 
-        return null;
+        LocalDateTime notAfterDateTime = LocalDateTime.of(2023, 6, 30, 23, 59); // Replace with your desired date and time
+        return ChronoLocalDateTime.from(notAfterDateTime);
     }
 
     public void setUuid(UUID randomUUID) {
