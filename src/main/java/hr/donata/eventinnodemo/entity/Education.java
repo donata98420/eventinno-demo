@@ -1,4 +1,5 @@
 package hr.donata.eventinnodemo.entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -7,9 +8,12 @@ import jakarta.persistence.Table;
 @Table(name = "education")
 public class Education {
 
+    @Column(name ="faculty")
     private String faculty;
+    @Column(name ="year")
     private int year;
     @Id
+    @Column(name ="id")
     private Long id;
 
     public String getFaculty() {
