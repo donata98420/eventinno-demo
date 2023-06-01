@@ -24,9 +24,9 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
 
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
-        Long teamRegistrationId = teamRegistrationDto.getId();
-        if (teamRegistrationId != null && teamRegistrationRepository.existsById(teamRegistrationId)) {
-            throw new DuplicateTeamRegistrationException("A team registration with the same ID already exists.");
+        String teamRegistrationName = teamRegistrationDto.getName();
+        if (teamRegistrationRepository.existsByName(teamRegistrationName)) {
+            throw new DuplicateTeamRegistrationException("A team registration with the same name already exists.");
         }
 
         Event event = eventRepository.findById(teamRegistrationDto.getEventId())
