@@ -8,7 +8,6 @@ import hr.donata.eventinnodemo.repository.RegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -29,23 +28,22 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void create(RegistrationDto registrationDto, EventDto eventDto) {
         ZonedDateTime now = ZonedDateTime.now();
 
-        // Check if the registration is within the specified time constraints
+        // time constraints
         if (registrationDto.getRegistrationsNotBefore() != null && registrationDto.getRegistrationsNotAfter() != null) {
-            ZonedDateTime registrationsNotBefore = ZonedDateTime.from(registrationDto.getRegistrationsNotBefore());
-            ZonedDateTime registrationsNotAfter = ZonedDateTime.from(registrationDto.getRegistrationsNotAfter());
+            ZonedDateTime registrationsNotBefore = ZonedDateTime.of(registrationDto.getRegistrationsNotBefore(), ZoneId.systemDefault());
+            ZonedDateTime registrationsNotAfter = ZonedDateTime.of(registrationDto.getRegistrationsNotAfter(), ZoneId.systemDefault());
 
             if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
-                throw new MethodNotAllowedException("Registrations for this event are currently closed.", eventDto != null ? eventDto.getName() : "");
+                throw new MethodNotAllowedException("Sorry, registrations for this event are currently closed.", eventDto != null ? eventDto.getName() : "");
             }
         }
 
-        // Generate a UUID for the registration
+        // Generating a UUID
         registrationDto.setUuid(UUID.randomUUID());
 
-        // Map the RegistrationDto to the Registration entity
+        // Mapping the RegistrationDto
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
 
-        // Save the registration in the repository
         registrationRepository.save(registration);
     }
 
