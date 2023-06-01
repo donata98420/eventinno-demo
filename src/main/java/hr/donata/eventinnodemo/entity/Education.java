@@ -37,4 +37,7 @@ public class Education {
     public Long getId() {
         return id;
     }
+
+    public void clear() {
+    }
 }
