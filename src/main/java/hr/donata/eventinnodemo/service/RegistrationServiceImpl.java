@@ -8,6 +8,9 @@ import hr.donata.eventinnodemo.repository.RegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -30,8 +33,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         // time constraints
         if (registrationDto.getRegistrationsNotBefore() != null && registrationDto.getRegistrationsNotAfter() != null) {
-            ZonedDateTime registrationsNotBefore = ZonedDateTime.of(registrationDto.getRegistrationsNotBefore(), ZoneId.systemDefault());
-            ZonedDateTime registrationsNotAfter = ZonedDateTime.of(registrationDto.getRegistrationsNotAfter(), ZoneId.systemDefault());
+            ZonedDateTime registrationsNotBefore = ZonedDateTime.of(LocalDateTime.from(registrationDto.getRegistrationsNotBefore()), ZoneId.systemDefault());
+            ZonedDateTime registrationsNotAfter = ZonedDateTime.of(LocalDateTime.from(registrationDto.getRegistrationsNotAfter()), ZoneId.systemDefault());
 
             if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
                 throw new MethodNotAllowedException("Sorry, registrations for this event are currently closed.", eventDto != null ? eventDto.getName() : "");
