@@ -24,6 +24,11 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
 
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
+        Long teamRegistrationId = teamRegistrationDto.getId();
+        if (teamRegistrationId != null && teamRegistrationRepository.existsById(teamRegistrationId)) {
+            throw new DuplicateTeamRegistrationException("A team registration with the same ID already exists.");
+        }
+
         Event event = eventRepository.findById(teamRegistrationDto.getEventId())
                 .orElseThrow(() -> new EntityNotFoundException("Event not found."));
 
@@ -37,6 +42,11 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
             mentorDto.setTeamRegistrationId(teamRegistration.getId());
             mentorService.create(mentorDto);
         }
+    }
+
+    @Override
+    public void save(List<TeamRegistrationDto> teams, Event event) {
+
     }
 
     private void validateMentors(List<MentorDto> mentorDtos) {
@@ -65,6 +75,12 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class DuplicateMentorEmailException extends BadRequestException {
         public DuplicateMentorEmailException(String message) {
+            super(message);
+        }
+    }
+
+    public static class DuplicateTeamRegistrationException extends RuntimeException {
+        public DuplicateTeamRegistrationException(String message) {
             super(message);
         }
     }

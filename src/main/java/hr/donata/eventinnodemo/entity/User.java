@@ -19,7 +19,6 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Education education;
-
     private String summary;
 
     private int experienceYears;
@@ -27,7 +26,6 @@ public class User {
     private List<String> skills;
     private String repositoryUrl;
     private String experienceSummary;
-
     private String motivation;
     private String preferredOS;
 

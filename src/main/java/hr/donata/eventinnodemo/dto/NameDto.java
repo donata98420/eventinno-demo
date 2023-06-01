@@ -1,22 +1,13 @@
 package hr.donata.eventinnodemo.dto;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 public class NameDto {
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String first;
+    private String last;
     private Long oib;
-
-
-    public NameDto(String fullName) {
-        String[] names = fullName.split(" ");
-        if (names.length > 0) {
-            this.firstName = names[0];
-        }
-        if (names.length > 1) {
-            this.lastName = names[1];
-        }
-    }
-
 
 }
