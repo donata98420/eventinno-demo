@@ -17,8 +17,8 @@ public class EducationServiceImpl implements EducationService {
     @Override
     public void create(EducationDto educationDto) {
         Education education = educationMapper.educationDtoToEducation(educationDto);
+        education.setId(1L); // assigning ID
         educationRepository.save(education);
-
     }
 
     @Override
