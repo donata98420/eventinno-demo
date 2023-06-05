@@ -8,6 +8,5 @@ public class NameDto {
     private String name;
     private String first;
     private String last;
-    private Long oib;
 
 }
