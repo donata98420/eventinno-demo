@@ -30,15 +30,6 @@ public class Name {
     @Column(name ="last")
     private String last;
 
-    public Long getOib() {
-        return oib;
-    }
-
-    public void setOib(Long oib) {
-        this.oib = oib;
-    }
-
-    private Long oib;
 
     @Id
     private Long id;
