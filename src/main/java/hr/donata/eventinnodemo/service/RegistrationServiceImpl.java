@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationRepository.save(registration);
 
         // Returning the HTTP response with status code 201 "Created"
-        return ResponseEntity.status(HttpStatus.CREATED).body("Registration created successfully.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Registration is  successfully created.");
     }
 
     @Override
