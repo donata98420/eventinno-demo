@@ -1,16 +1,15 @@
-package hr.donata.eventinnodemo.service;
-
 import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
+import hr.donata.eventinnodemo.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -23,15 +22,15 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationMapper registrationMapper;
 
     @Override
-    public void create(RegistrationDto registrationDto) {
-        create(registrationDto, null);
+    public ResponseEntity<String> create(RegistrationDto registrationDto) {
+        return create(registrationDto, null);
     }
 
     @Override
-    public void create(RegistrationDto registrationDto, EventDto eventDto) {
+    public ResponseEntity<String> create(RegistrationDto registrationDto, EventDto eventDto) {
         ZonedDateTime now = ZonedDateTime.now();
 
-        // time constraints
+        // Time converting
         if (registrationDto.getRegistrationsNotBefore() != null && registrationDto.getRegistrationsNotAfter() != null) {
             ZonedDateTime registrationsNotBefore = ZonedDateTime.of(LocalDateTime.from(registrationDto.getRegistrationsNotBefore()), ZoneId.systemDefault());
             ZonedDateTime registrationsNotAfter = ZonedDateTime.of(LocalDateTime.from(registrationDto.getRegistrationsNotAfter()), ZoneId.systemDefault());
@@ -48,6 +47,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
 
         registrationRepository.save(registration);
+
+        // Returning the HTTP response with status code 201 "Created"
+        return ResponseEntity.status(HttpStatus.CREATED).body("Registration created successfully.");
     }
 
     @Override
@@ -60,4 +62,6 @@ public class RegistrationServiceImpl implements RegistrationService {
             super(message + (name.isEmpty() ? "" : " Event: " + name));
         }
     }
+
+
 }
