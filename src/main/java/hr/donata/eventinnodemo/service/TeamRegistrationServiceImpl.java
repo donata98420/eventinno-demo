@@ -62,16 +62,18 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
 
     @Override
     public void deleteTeamRegistration(Long id) {
-
         teamRegistrationRepository.deleteById(id);
     }
 
-    public static class BadRequestException extends IllegalArgumentException {
-        public BadRequestException(String message) {
+    //Dupli timovi
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class DuplicateTeamRegistrationException extends BadRequestException {
+        public DuplicateTeamRegistrationException(String message) {
             super(message);
         }
     }
 
+    //Dupli mentori
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class DuplicateMentorEmailException extends BadRequestException {
         public DuplicateMentorEmailException(String message) {
@@ -79,8 +81,8 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
         }
     }
 
-    public static class DuplicateTeamRegistrationException extends RuntimeException {
-        public DuplicateTeamRegistrationException(String message) {
+    public static class BadRequestException extends RuntimeException {
+        public BadRequestException(String message) {
             super(message);
         }
     }

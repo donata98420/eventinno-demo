@@ -1,9 +1,10 @@
+package hr.donata.eventinnodemo.service;
+
 import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
-import hr.donata.eventinnodemo.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationRepository.save(registration);
 
         // Returning the HTTP response with status code 201 "Created"
-        return ResponseEntity.status(HttpStatus.CREATED).body("Registration is  successfully created.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Registration is successfully created.");
     }
 
     @Override
@@ -63,6 +64,4 @@ public class RegistrationServiceImpl implements RegistrationService {
             super(message + (name.isEmpty() ? "" : " Event: " + name));
         }
     }
-
-
 }
