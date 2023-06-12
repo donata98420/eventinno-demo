@@ -17,7 +17,7 @@ public class RegistrationDto {
 
     public ChronoLocalDateTime<?> getRegistrationsNotBefore() {
 
-        LocalDateTime notBeforeDateTime = LocalDateTime.of(2023, 6, 1, 0, 0); // Replace with your desired date and time
+        LocalDateTime notBeforeDateTime = LocalDateTime.of(2023, 6, 1, 0, 0); //
         return ChronoLocalDateTime.from(notBeforeDateTime);
     }
 
