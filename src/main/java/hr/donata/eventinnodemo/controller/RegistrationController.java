@@ -18,11 +18,10 @@ public class RegistrationController {
     @PostMapping(path = "")
     public ResponseEntity<RegistrationDto> saveRegistration(@RequestBody RegistrationDto registrationDto) {
         ResponseEntity<String> registration = registrationService.create(registrationDto);
-        return ResponseEntity.created(URI.create("/registration/" + registration.getBody()))
-                .body(registrationDto);
+        return ResponseEntity.ok(registrationDto);
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteRegistration(@PathVariable Long id) {
         registrationService.deleteRegistration(id);
         return ResponseEntity.ok("You deleted one registration from the database.");
