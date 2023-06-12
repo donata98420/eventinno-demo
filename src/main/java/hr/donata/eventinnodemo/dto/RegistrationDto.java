@@ -23,7 +23,7 @@ public class RegistrationDto {
 
     public ChronoLocalDateTime<?> getRegistrationsNotAfter() {
 
-        LocalDateTime notAfterDateTime = LocalDateTime.of(2023, 6, 30, 23, 59); // Replace with your desired date and time
+        LocalDateTime notAfterDateTime = LocalDateTime.of(2023, 6, 30, 23, 59); //
         return ChronoLocalDateTime.from(notAfterDateTime);
     }
 
