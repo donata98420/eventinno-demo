@@ -8,6 +8,7 @@ import java.util.UUID;
 @Data
 public class RegistrationDto {
     private UUID uuid;
+    private Long id;
     private Long eventId;
     private PersonalDto personal;
     private ExperienceDto experience;
@@ -30,9 +31,6 @@ public class RegistrationDto {
         this.uuid = randomUUID;
     }
 
-
-    public String getId() {
-    }
 
     public Long getEventId() {
         return eventId;
