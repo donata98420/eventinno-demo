@@ -27,18 +27,6 @@ public class RegistrationDto {
         return ChronoLocalDateTime.from(notAfterDateTime);
     }
 
-    public void setUuid(UUID randomUUID) {
-        this.uuid = randomUUID;
-    }
-
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
 
     @Data
     public static class PersonalDto {
