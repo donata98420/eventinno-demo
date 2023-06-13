@@ -8,22 +8,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "name")
 public class Name {
-
-    public String getFirst() {
-        return first;
-    }
-
-    public void setFirst(String first) {
-        this.first = first;
-    }
-
-    public String getLast() {
-        return last;
-    }
-
-    public void setLast(String last) {
-        this.last = last;
-    }
+    @Id
+    private Long id;
 
     @Column(name ="first")
     private String first;
@@ -31,16 +17,6 @@ public class Name {
     private String last;
 
 
-    @Id
-    private Long id;
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
 }
