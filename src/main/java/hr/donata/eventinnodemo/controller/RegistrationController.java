@@ -15,12 +15,6 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
-    @PostMapping(path = "")
-    public ResponseEntity<RegistrationDto> saveRegistration(@RequestBody RegistrationDto registrationDto) {
-        ResponseEntity<String> createdRegistration = registrationService.create(registrationDto);
-        return ResponseEntity.created(URI.create("/event/" + registrationDto.getEventId() + "/registrations/" + createdRegistration.getId()))
-                .body(createdRegistration);
-    }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteRegistration(@PathVariable Long id) {
