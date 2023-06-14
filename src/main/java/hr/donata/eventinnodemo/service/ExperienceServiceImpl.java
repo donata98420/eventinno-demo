@@ -24,6 +24,6 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     public void deleteExperience(Long id) {
-
+experienceRepository.deleteById(id);
     }
 }
