@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 
 public class Experience {
 
+    @Column (name = "id")
+    private Long id;
     @Column(name ="years")
     private int years;
     @Column(name ="skills")
