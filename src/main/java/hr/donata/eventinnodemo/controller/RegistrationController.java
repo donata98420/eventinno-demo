@@ -1,5 +1,6 @@
 package hr.donata.eventinnodemo.controller;
 
+import hr.donata.eventinnodemo.dto.MentorDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,11 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
+    @PostMapping(path = "/save")
+    private ResponseEntity<RegistrationDto> saveRegistration(@RequestBody RegistrationDto registrationDto) {
+        registrationService.create(registrationDto);
+        return ResponseEntity.ok(registrationDto);
+    }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteRegistration(@PathVariable Long id) {
