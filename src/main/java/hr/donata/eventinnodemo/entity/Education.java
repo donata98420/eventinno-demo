@@ -22,6 +22,4 @@ public class Education {
     @Column(name ="year")
     private int year;
 
-    public void clear() {
-    }
 }
