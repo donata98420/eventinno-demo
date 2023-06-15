@@ -29,15 +29,6 @@ public class RegistrationDto {
 
 
     @Data
-    public static class PersonalDto {
-        private NameDto name;
-        private String email;
-        private String phone;
-        private EducationDto education;
-        private String summary;
-    }
-
-    @Data
     public static class NameDto {
         private String first;
         private String last;
@@ -49,11 +40,4 @@ public class RegistrationDto {
         private int year;
     }
 
-    @Data
-    public static class ExperienceDto {
-        private int years;
-        private String[] skills;
-        private String repositoryUrl;
-        private String summary;
-    }
 }
