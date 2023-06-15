@@ -6,7 +6,7 @@ import lombok.Data;
 public class EducationDto {
     private String faculty;
     private int year;
-    private Long id;
+
 
 
 }
