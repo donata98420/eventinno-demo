@@ -1,10 +1,21 @@
 package hr.donata.eventinnodemo.entity;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Entity
+@Table(name = "experience")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Experience {
 
-    @Column (name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name ="years")
     private int years;
