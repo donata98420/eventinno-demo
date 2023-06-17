@@ -24,7 +24,5 @@ public class UserDto {
         return registrationList;
     }
 
-    public void setRegistrationList(List<RegistrationDto> registrationList) {
-        this.registrationList = registrationList;
-    }
+
 }
