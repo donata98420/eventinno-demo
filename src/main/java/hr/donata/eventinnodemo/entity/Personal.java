@@ -1,5 +1,6 @@
 package hr.donata.eventinnodemo.entity;
 
+import hr.donata.eventinnodemo.dto.EducationDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,8 +20,10 @@ public class Personal {
     private String email;
     @Column(name ="phone")
     private String phone;
-    @Column(name ="education")
-    private RegistrationDto.EducationDto education;
+
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "education_id")
+    //private Education education;
     @Column(name ="summary")
     private String summary;
 
