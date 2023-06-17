@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "experience")
 @Getter
@@ -20,7 +22,7 @@ public class Experience {
     @Column(name ="years")
     private int years;
     @Column(name ="skills")
-    private String[] skills;
+    List<String> skills
     @Column(name ="repositoryUrl")
     private String repositoryUrl;
     @Column(name ="summary")
