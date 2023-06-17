@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface NameRepository extends JpaRepository <Name, Long>  {
 
-    Optional<Object> findByFirst(String first);
+    Optional<Name> findByFirst(String first);
 
     boolean findByLast(String last);
 }
