@@ -9,5 +9,4 @@ public interface NameRepository extends JpaRepository <Name, Long>  {
 
     Optional<Name> findByFirst(String first);
 
-    boolean findByLast(String last);
 }
