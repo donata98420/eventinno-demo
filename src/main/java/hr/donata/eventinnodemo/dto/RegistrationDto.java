@@ -28,16 +28,5 @@ public class RegistrationDto {
     }
 
 
-    @Data
-    public static class NameDto {
-        private String first;
-        private String last;
-    }
-
-    @Data
-    public static class EducationDto {
-        private String faculty;
-        private int year;
-    }
 
 }
