@@ -25,6 +25,10 @@ public class Registration {
     @JoinColumn(name = "experience_id", referencedColumnName = "id")
     private Experience experience;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "education_id", referencedColumnName = "id")
+    private Education education;
+
     @Column(name ="motivation")
     private String motivation;
     @Column(name ="preferredOs")
