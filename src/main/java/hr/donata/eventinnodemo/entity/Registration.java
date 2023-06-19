@@ -31,8 +31,6 @@ public class Registration {
     @Column(name = "registrations_not_after")
     private String registrationsNotAfter;
 
-    @OneToMany(mappedBy = "registration", cascade = {CascadeType.ALL})
-    private Personal personal;
 
 
 
