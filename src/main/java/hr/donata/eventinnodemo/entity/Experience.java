@@ -21,4 +21,8 @@ public class Experience {
     @Column(name ="summary")
     private String summary;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "registration_id")
+    private Registration registration;
+
 }
