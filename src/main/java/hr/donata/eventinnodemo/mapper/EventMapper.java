@@ -13,9 +13,9 @@ public interface EventMapper {
     EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
     Event eventDtoToEvent(EventDto eventDto);
     @AfterMapping
+    //for each team
     default void mapEventIdInUser(@MappingTarget Event event) {
         event.getTeamRegistrationList().forEach(team -> team.setEvent(event));
     }
-
 
 }
