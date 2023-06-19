@@ -21,9 +21,9 @@ public class Registration {
     @Column(nullable = false, unique = true)
     private UUID uuid;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "experience_id", referencedColumnName = "id")
+    private Experience experience;
 
     @Column(name ="motivation")
     private String motivation;
