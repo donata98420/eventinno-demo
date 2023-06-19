@@ -33,8 +33,8 @@ public class User {
     private String motivation;
     private String preferredOS;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
-    private List<Registration> registrationList;
+    //@OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+   // private List<Registration> registrationList;
 
 
 }
