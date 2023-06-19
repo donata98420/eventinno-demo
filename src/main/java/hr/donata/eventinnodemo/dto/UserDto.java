@@ -20,9 +20,7 @@ public class UserDto {
     private String preferredOS;
     private List<RegistrationDto> registrationList;
 
-    public List<RegistrationDto> getRegistrationList() {
-        return registrationList;
-    }
+
 
 
 }
