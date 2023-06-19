@@ -25,11 +25,10 @@ public class Registration {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "registrations_not_before")
-    private String registrationsNotBefore;
-
-    @Column(name = "registrations_not_after")
-    private String registrationsNotAfter;
+    @Column(name ="motivation")
+    private String motivation;
+    @Column(name ="preferredOs")
+    private String preferredOs;
 
 
 
