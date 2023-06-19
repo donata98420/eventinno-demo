@@ -13,7 +13,6 @@ import java.util.List;
 public class TeamRegistrationDto {
     private Long id;
     private String name;
-    //
     private List<MentorDto> mentors = new ArrayList<>();
     private Event event;
     private Long eventId;

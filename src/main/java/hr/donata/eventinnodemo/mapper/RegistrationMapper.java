@@ -4,7 +4,6 @@ import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Registration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 
