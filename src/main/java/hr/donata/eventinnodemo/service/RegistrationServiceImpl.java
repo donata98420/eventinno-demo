@@ -33,9 +33,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         ZonedDateTime now = ZonedDateTime.now();
 
         // Time converting
-        if (registrationDto.getRegistrationsNotBefore() != null && registrationDto.getRegistrationsNotAfter() != null) {
-            ZonedDateTime registrationsNotBefore = ZonedDateTime.of((LocalDateTime) registrationDto.getRegistrationsNotBefore(), ZoneId.systemDefault());
-            ZonedDateTime registrationsNotAfter = ZonedDateTime.of((LocalDateTime) registrationDto.getRegistrationsNotAfter(), ZoneId.systemDefault());
+        if (event.getRegistrationsNotBefore() != null && event.getRegistrationsNotAfter() != null) {
+            ZonedDateTime registrationsNotBefore = event.getRegistrationsNotBefore();
+            ZonedDateTime registrationsNotAfter = event.getRegistrationsNotAfter();
 
             if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
                 throw new MethodNotAllowedException("Sorry, registrations for this event are currently closed.", event.getName());
