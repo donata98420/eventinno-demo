@@ -1,8 +1,6 @@
 package hr.donata.eventinnodemo.dto;
 
 import lombok.Data;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.UUID;
 
 @Data
