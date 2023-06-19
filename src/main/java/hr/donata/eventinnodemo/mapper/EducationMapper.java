@@ -10,6 +10,6 @@ import org.mapstruct.factory.Mappers;
 public interface EducationMapper {
 
     EducationMapper INSTANCE = Mappers.getMapper(EducationMapper.class);
-    @Mapping(target = "id", source = "id")
+    @Mapping(target = "id", source = "year")
     Education educationDtoToEducation(EducationDto educationDto);
 }

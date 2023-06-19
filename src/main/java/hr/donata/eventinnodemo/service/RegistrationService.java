@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 
 public interface RegistrationService {
-    ResponseEntity<String> create(RegistrationDto registrationDto);
-
-    abstract ResponseEntity<String> create(RegistrationDto registrationDto, EventDto eventDto);
-
+    ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId);
     void deleteRegistration(Long id);
 
 

@@ -6,7 +6,6 @@ import hr.donata.eventinnodemo.mapper.NameMapper;
 import hr.donata.eventinnodemo.repository.NameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

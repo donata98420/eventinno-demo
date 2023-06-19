@@ -16,4 +16,6 @@ public interface EventMapper {
     default void mapEventIdInUser(@MappingTarget Event event) {
         event.getTeamRegistrationList().forEach(team -> team.setEvent(event));
     }
+
+
 }

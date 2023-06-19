@@ -1,6 +1,5 @@
 package hr.donata.eventinnodemo.controller;
 
-import hr.donata.eventinnodemo.dto.ExperienceDto;
 import hr.donata.eventinnodemo.dto.PersonalDto;
 import hr.donata.eventinnodemo.service.PersonalService;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ public class PersonalController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ExperienceDto> savePersonal(@RequestBody PersonalDto personalDto) {
+    public ResponseEntity<PersonalDto> savePersonal(@RequestBody PersonalDto personalDto) {
         personalService.create(personalDto);
         return ResponseEntity.ok(personalDto);
     }

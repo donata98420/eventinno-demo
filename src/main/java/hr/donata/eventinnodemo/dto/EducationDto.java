@@ -7,6 +7,4 @@ public class EducationDto {
     private String faculty;
     private int year;
 
-
-
 }

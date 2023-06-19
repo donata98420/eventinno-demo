@@ -1,9 +1,10 @@
 package hr.donata.eventinnodemo.service;
 
-import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
+import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
+import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,26 +20,25 @@ import java.util.UUID;
 @Transactional
 @RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
-
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
+    private final EventRepository eventRepository;
 
     @Override
-    public ResponseEntity<String> create(RegistrationDto registrationDto) {
-        return create(registrationDto, null);
-    }
+    public ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId) {
 
-    @Override
-    public ResponseEntity<String> create(RegistrationDto registrationDto, EventDto eventDto) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Event is not found."));
+
         ZonedDateTime now = ZonedDateTime.now();
 
         // Time converting
         if (registrationDto.getRegistrationsNotBefore() != null && registrationDto.getRegistrationsNotAfter() != null) {
-            ZonedDateTime registrationsNotBefore = ZonedDateTime.of(LocalDateTime.from(registrationDto.getRegistrationsNotBefore()), ZoneId.systemDefault());
-            ZonedDateTime registrationsNotAfter = ZonedDateTime.of(LocalDateTime.from(registrationDto.getRegistrationsNotAfter()), ZoneId.systemDefault());
+            ZonedDateTime registrationsNotBefore = ZonedDateTime.of((LocalDateTime) registrationDto.getRegistrationsNotBefore(), ZoneId.systemDefault());
+            ZonedDateTime registrationsNotAfter = ZonedDateTime.of((LocalDateTime) registrationDto.getRegistrationsNotAfter(), ZoneId.systemDefault());
 
             if (now.isBefore(registrationsNotBefore) || now.isAfter(registrationsNotAfter)) {
-                throw new MethodNotAllowedException("Sorry, registrations for this event are currently closed.", eventDto != null ? eventDto.getName() : "");
+                throw new MethodNotAllowedException("Sorry, registrations for this event are currently closed.", event.getName());
             }
         }
 
