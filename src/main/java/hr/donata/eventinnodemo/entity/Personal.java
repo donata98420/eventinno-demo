@@ -20,10 +20,9 @@ public class Personal {
     private String email;
     @Column(name ="phone")
     private String phone;
-
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "education_id")
-    //private Education education;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "education_id")
+    private Education education;
     @Column(name ="summary")
     private String summary;
 
