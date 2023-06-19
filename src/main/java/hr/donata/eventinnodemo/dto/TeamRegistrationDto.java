@@ -6,10 +6,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class TeamRegistrationDto {
     private Long id;
     private String name;
