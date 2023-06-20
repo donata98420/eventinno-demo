@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -58,7 +59,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void deleteRegistration(Long id) {
-        registrationRepository.deleteById(id);
+        Optional<Registration> registrationOptional = registrationRepository.findById(id);
+        if (registrationOptional.isPresent()) {
+            Registration registration = registrationOptional.get();
+
+            Event event = registration.getEvent();
+            if (event != null) {
+                // If event exists, then delete registration
+                registrationRepository.deleteById(id);
+            } else {
+                throw new IllegalArgumentException("Sorry, event is not found for the given registration.");
+            }
+        } else {
+            throw new IllegalArgumentException("Sorry, registration is not found.");
+        }
     }
 
     public static class MethodNotAllowedException extends RuntimeException {
