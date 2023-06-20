@@ -14,8 +14,8 @@ import lombok.Setter;
 public class Education {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "education_sequence")
+    @SequenceGenerator(name = "education_sequence", allocationSize = 1)
     private Long id;
     @Column(name ="faculty")
     private String faculty;
