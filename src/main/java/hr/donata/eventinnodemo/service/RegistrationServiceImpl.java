@@ -48,6 +48,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         // Mapping the RegistrationDto
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
 
+        registration.setEvent(event);
+
         registrationRepository.save(registration);
 
         // Returning the HTTP response with status code 201 "Created"
