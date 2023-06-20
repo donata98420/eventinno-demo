@@ -21,6 +21,11 @@ public class Registration {
     @Column(nullable = false, unique = true)
     private UUID uuid;
 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    private Event event;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "experience_id", referencedColumnName = "id")
     private Experience experience;
