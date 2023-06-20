@@ -16,11 +16,13 @@ public class Personal {
     private String email;
     @Column(name ="phone")
     private String phone;
+
+    @Column(name ="summary")
+    private String summary;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "education_id")
     private Education education;
-    @Column(name ="summary")
-    private String summary;
+
 
 
 }
