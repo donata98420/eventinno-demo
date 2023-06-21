@@ -33,6 +33,7 @@ public class NameServiceImpl implements NameService {
 
     public static class NameNotFoundException extends RuntimeException {
         public NameNotFoundException(String message) {
+
             super(message);
         }
     }
