@@ -20,9 +20,16 @@ public class RegistrationController {
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
 
-    @DeleteMapping(path = "/event/{event_id}/registrations/{registration_id}")
-    public ResponseEntity<String> deleteRegistration(@PathVariable("event_id") Long eventId, @PathVariable("registration_id") Long registrationId) {
-        registrationService.deleteRegistration(registrationId);
-        return ResponseEntity.ok("You deleted one registration.");
+    @DeleteMapping("/{registrationId}/events/{eventId}")
+    public ResponseEntity<String> deleteRegistrationForEvent(
+            @PathVariable Long registrationId,
+            @PathVariable Long eventId) {
+
+        try {
+            registrationService.deleteRegistrationForEvent(registrationId, eventId);
+            return ResponseEntity.ok("Registration is successfully deleted for the event.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
