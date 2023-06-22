@@ -22,11 +22,11 @@ public class RegistrationController {
 
     @DeleteMapping("/{id}/events/{event_id}")
     public ResponseEntity<String> deleteRegistrationForEvent(
-            @PathVariable Long registrationId,
+            @PathVariable Long id,
             @PathVariable Long eventId) {
 
         try {
-            registrationService.deleteRegistrationForEvent(registrationId, eventId);
+            registrationService.deleteRegistrationForEvent(id, eventId);
             return ResponseEntity.ok("Registration is successfully deleted.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
