@@ -20,7 +20,7 @@ public class RegistrationController {
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
 
-    @DeleteMapping("/{registrationId}/events/{eventId}")
+    @DeleteMapping("/{registration_id}/events/{event_id}")
     public ResponseEntity<String> deleteRegistrationForEvent(
             @PathVariable Long registrationId,
             @PathVariable Long eventId) {

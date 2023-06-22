@@ -70,8 +70,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             Event event = registration.getEvent();
             if (event != null && event.getId() != null && event.getId().equals(eventId)) {
-                // If event exists, the delete one registration
+                // If event exists, then delete one registration.
                 registrationRepository.deleteById(registrationId);
+
             } else {
                 throw new IllegalArgumentException("Sorry, the event is not found for the given registration.");
             }
