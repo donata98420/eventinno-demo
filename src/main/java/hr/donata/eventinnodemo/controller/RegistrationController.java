@@ -27,7 +27,7 @@ public class RegistrationController {
 
         try {
             registrationService.deleteRegistrationForEvent(registrationId, eventId);
-            return ResponseEntity.ok("Registration is successfully deleted for the event.");
+            return ResponseEntity.ok("Registration is successfully deleted.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

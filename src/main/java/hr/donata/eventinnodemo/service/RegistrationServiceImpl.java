@@ -58,20 +58,20 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void deleteRegistration(Long id) {
-        Optional<Registration> registrationOptional = registrationRepository.findById(id);
+    public void deleteRegistrationForEvent(Long registrationId, Long eventId) {
+        Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
         if (registrationOptional.isPresent()) {
             Registration registration = registrationOptional.get();
 
             Event event = registration.getEvent();
-            if (event != null && event.getId() != null) {
-                // If event exists, delete registration
-                registrationRepository.deleteById(id);
+            if (event != null && event.getId() != null && event.getId().equals(eventId)) {
+                // If event exists and matches the given eventId, delete registration
+                registrationRepository.deleteById(registrationId);
             } else {
-                throw new IllegalArgumentException("Sorry, event is not found for the given registration.");
+                throw new IllegalArgumentException("Sorry, the event is not found for the given registration.");
             }
         } else {
-            throw new IllegalArgumentException("Sorry, registration is not found.");
+            throw new IllegalArgumentException("Sorry, the registration is not found.");
         }
     }
 
