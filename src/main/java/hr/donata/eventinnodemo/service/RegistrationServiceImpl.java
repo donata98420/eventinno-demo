@@ -58,6 +58,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public void deleteRegistration(Long id) {
+
+    }
+
+    @Override
     public void deleteRegistrationForEvent(Long registrationId, Long eventId) {
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
         if (registrationOptional.isPresent()) {
@@ -65,7 +70,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             Event event = registration.getEvent();
             if (event != null && event.getId() != null && event.getId().equals(eventId)) {
-                // If event exists and matches the given eventId, delete registration
+                // If event exists, the delete one registration
                 registrationRepository.deleteById(registrationId);
             } else {
                 throw new IllegalArgumentException("Sorry, the event is not found for the given registration.");
