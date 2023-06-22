@@ -20,13 +20,13 @@ public class RegistrationController {
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
 
-    @DeleteMapping("/{id}/events/{event_id}")
+    @DeleteMapping("/{registrationId}/events/{event_id}")
     public ResponseEntity<String> deleteRegistrationForEvent(
-            @PathVariable Long id,
+            @PathVariable Long registrationId,
             @PathVariable Long eventId) {
 
         try {
-            registrationService.deleteRegistrationForEvent(id, eventId);
+            registrationService.deleteRegistrationForEvent(registrationId, eventId);
             return ResponseEntity.ok("Registration is successfully deleted.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
