@@ -3,6 +3,7 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
+import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
@@ -75,6 +76,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             } else {
                 throw new IllegalArgumentException("Sorry, the event is not found for the given registration.");
+                //  /registration/1/events/2
             }
         } else {
             throw new IllegalArgumentException("Sorry, the registration is not found.");
