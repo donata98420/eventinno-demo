@@ -22,8 +22,5 @@ public class Education {
     @Column(name ="year")
     private int year;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "registration_id")
-    private Registration registration;
 
 }
