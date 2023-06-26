@@ -11,14 +11,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class NameServiceImpl implements NameService {
-
     private final NameRepository nameRepository;
     private final NameMapper nameMapper;
 
     @Override
     public void create(NameDto nameDto) {
         Name name = nameMapper.nameDtoToName(nameDto);
-        name.setId(name.getId()); //getting id
         nameRepository.save(name);
     }
 
