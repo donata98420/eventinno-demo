@@ -34,6 +34,9 @@ public class Registration {
     @JoinColumn(name = "personal_id", referencedColumnName = "id")
     private Personal personal;
 
+    @OneToOne(mappedBy = "registration", cascade = CascadeType.ALL)
+    private Education education;
+
     @Column(name ="motivation")
     private String motivation;
     @Column(name ="preferredOs")
