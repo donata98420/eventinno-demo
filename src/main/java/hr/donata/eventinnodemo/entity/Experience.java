@@ -10,7 +10,8 @@ import java.util.List;
 @Data
 public class Experience {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "experience_sequence")
+    @SequenceGenerator(name = "experience_sequence", allocationSize = 1)
     private Long id;
     @Column(name ="years")
     private int years;

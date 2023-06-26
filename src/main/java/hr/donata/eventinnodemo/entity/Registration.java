@@ -15,9 +15,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Registration {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "registration_sequence")
+    @SequenceGenerator(name = "registration_sequence", allocationSize = 1)
     private Long id;
-
     @Column(nullable = false, unique = true)
     private UUID uuid;
 

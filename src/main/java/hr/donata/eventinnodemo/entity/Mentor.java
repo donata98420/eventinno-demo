@@ -13,7 +13,8 @@ import lombok.*;
 public class Mentor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mentor_sequence")
+    @SequenceGenerator(name = "mentor_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name ="email")

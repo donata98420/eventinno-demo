@@ -18,7 +18,8 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
+    @SequenceGenerator(name = "event_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name ="name", unique = true)
