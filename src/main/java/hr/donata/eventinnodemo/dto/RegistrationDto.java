@@ -1,5 +1,7 @@
 package hr.donata.eventinnodemo.dto;
 
+import hr.donata.eventinnodemo.entity.Education;
+import hr.donata.eventinnodemo.entity.Event;
 import lombok.Data;
 import java.util.UUID;
 
@@ -11,4 +13,6 @@ public class RegistrationDto {
     private ExperienceDto experience;
     private String motivation;
     private String preferredOs;
+
+    private Education education;
 }
