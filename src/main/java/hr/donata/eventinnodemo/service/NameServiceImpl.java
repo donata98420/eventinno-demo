@@ -18,6 +18,7 @@ public class NameServiceImpl implements NameService {
     @Override
     public void create(NameDto nameDto) {
         Name name = nameMapper.nameDtoToName(nameDto);
+        name.setId(name.getId()); //getting id
         nameRepository.save(name);
     }
 
