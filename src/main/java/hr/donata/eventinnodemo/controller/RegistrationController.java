@@ -3,6 +3,7 @@ package hr.donata.eventinnodemo.controller;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.service.EventService;
 import hr.donata.eventinnodemo.service.RegistrationService;
+import hr.donata.eventinnodemo.service.ScoreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/registration")
 public class RegistrationController {
     private final RegistrationService registrationService;
+    private final ScoreService scoreService;
 
-    public RegistrationController(RegistrationService registrationService, EventService eventService) {
+    public RegistrationController(RegistrationService registrationService, EventService eventService, ScoreService scoreService) {
         this.registrationService = registrationService;
+        this.scoreService = scoreService;
     }
 
     @PostMapping(path = "/{event_id}/registrations")
