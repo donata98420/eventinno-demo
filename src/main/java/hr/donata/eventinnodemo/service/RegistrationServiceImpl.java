@@ -22,6 +22,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
+    private final ScoreService scoreService;
 
     @Override
     public ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId) {
@@ -39,7 +40,6 @@ public class RegistrationServiceImpl implements RegistrationService {
                 throw new MethodNotAllowedException("Sorry, registrations for this event are currently closed.", event.getName());
             }
         }
-
 
         // Generating UUID
         UUID uuid = UUID.randomUUID();
