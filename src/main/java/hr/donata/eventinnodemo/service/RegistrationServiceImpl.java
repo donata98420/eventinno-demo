@@ -14,8 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
-
-import static org.hibernate.type.StandardBasicTypes.UUID;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -44,7 +43,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         // Generating UUID
-        UUID uuid = UUID.wait();
+        UUID uuid = UUID.randomUUID();
         registrationDto.setUuid(uuid);
 
         // Mapping RegistrationDto
