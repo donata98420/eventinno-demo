@@ -20,9 +20,7 @@ public class Registration {
     private Long id;
     @Column(nullable = false, unique = true)
     private UUID uuid;
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 
@@ -38,8 +36,4 @@ public class Registration {
     private String motivation;
     @Column(name ="preferredOs")
     private String preferredOs;
-
-
-
-
 }
