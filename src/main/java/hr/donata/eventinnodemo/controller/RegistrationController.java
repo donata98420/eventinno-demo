@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     private final RegistrationService registrationService;
     private final ScoreService scoreService;
+    private final EventService eventService;
 
-    public RegistrationController(RegistrationService registrationService, EventService eventService, ScoreService scoreService) {
+    public RegistrationController(RegistrationService registrationService, EventService eventService, ScoreService scoreService, EventService eventService1) {
         this.registrationService = registrationService;
         this.scoreService = scoreService;
+        this.eventService = eventService1;
     }
 
     @PostMapping(path = "/{event_id}/registrations")
