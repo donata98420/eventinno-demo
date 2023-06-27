@@ -59,13 +59,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         registrationRepository.save(registration);
 
-        // Returning status code 201 "Created"
+     
         return ResponseEntity.status(HttpStatus.CREATED).body("Registration is successfully created.");
     }
 
     @Override
     public void deleteRegistration(Long id) {
-        // Implement the logic to delete a registration by its ID
+
         registrationRepository.deleteById(id);
     }
 
