@@ -3,7 +3,6 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
-import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
@@ -12,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,7 +25,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId) {
-
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("Event is not found."));
 
@@ -44,17 +40,18 @@ public class RegistrationServiceImpl implements RegistrationService {
             }
         }
 
-        // Generating a UUID
-        registrationDto.setUuid(UUID.randomUUID());
 
-        // Mapping the RegistrationDto
+        // Generating UUID
+        UUID uuid = UUID.randomUUID();
+        registrationDto.setUuid(uuid);
+
+        // Mapping RegistrationDto
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
-
         registration.setEvent(event);
 
         registrationRepository.save(registration);
 
-        // Returning the HTTP response with status code 201 "Created"
+        // Returning status code 201 "Created"
         return ResponseEntity.status(HttpStatus.CREATED).body("Registration is successfully created.");
     }
 
