@@ -1,16 +1,17 @@
-package hr.donata.eventinnodemo.service;
-
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
+import hr.donata.eventinnodemo.service.RegistrationService;
+import hr.donata.eventinnodemo.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,6 +23,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
+    private final ScoreService scoreService;
 
     @Override
     public ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId) {
@@ -40,7 +42,6 @@ public class RegistrationServiceImpl implements RegistrationService {
             }
         }
 
-
         // Generating UUID
         UUID uuid = UUID.randomUUID();
         registrationDto.setUuid(uuid);
@@ -49,15 +50,23 @@ public class RegistrationServiceImpl implements RegistrationService {
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
         registration.setEvent(event);
 
+        // Saving the registration
         registrationRepository.save(registration);
 
-        // Returning status code 201 "Created"
+        // Scoring the registration
+        int score = scoreService.calculateScore(registration);
+        registration.setScore(score);
+
+        registrationRepository.save(registration);
+
+     
         return ResponseEntity.status(HttpStatus.CREATED).body("Registration is successfully created.");
     }
 
     @Override
     public void deleteRegistration(Long id) {
 
+        registrationRepository.deleteById(id);
     }
 
     @Override
@@ -68,12 +77,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             Event event = registration.getEvent();
             if (event != null && event.getId() != null && event.getId().equals(eventId)) {
-                // If event exists, then delete one registration.
+                // If event exists, then delete the registration
                 registrationRepository.deleteById(registrationId);
-
             } else {
                 throw new IllegalArgumentException("Sorry, the event is not found for the given registration.");
-                //  /registration/1/events/2
             }
         } else {
             throw new IllegalArgumentException("Sorry, the registration is not found.");

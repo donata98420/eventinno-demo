@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/registration")
 public class RegistrationController {
     private final RegistrationService registrationService;
+    private final EventService eventService;
 
     public RegistrationController(RegistrationService registrationService, EventService eventService) {
         this.registrationService = registrationService;
+        this.eventService = eventService;
     }
 
     @PostMapping(path = "/{event_id}/registrations")

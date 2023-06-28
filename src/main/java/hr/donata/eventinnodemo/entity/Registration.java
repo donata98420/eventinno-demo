@@ -36,4 +36,8 @@ public class Registration {
     private String motivation;
     @Column(name ="preferredOs")
     private String preferredOs;
+
+    @Column(name ="score")
+    private int score;
+
 }
