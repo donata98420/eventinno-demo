@@ -7,12 +7,18 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ScoreServiceImpl implements ScoreService{
+
+    /*
+    private final education
+    private final experience
+            ...
+    */
+
     @Override
     public int calculateScore(Registration registration) {
 
-
-
-
+        int score = 0;
+        // .............
 
     }
 }
