@@ -2,6 +2,8 @@ package hr.donata.eventinnodemo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -16,7 +18,8 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
+    @SequenceGenerator(name = "event_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name ="name", unique = true)
@@ -25,6 +28,7 @@ public class Event {
     @Column(name ="maxParticipant")
     private Byte maxParticipants;
 
+    //
     @Column(name ="registrationsNotAfter")
     private ZonedDateTime registrationsNotAfter;
 
@@ -32,7 +36,7 @@ public class Event {
     private ZonedDateTime confirmationNotAfter;
 
     @Column(name ="registrationsNotBefore")
-    private LocalDateTime registrationsNotBefore;
+    private ZonedDateTime registrationsNotBefore;
 
     @Column(name ="startDate")
     private LocalDate startDate;

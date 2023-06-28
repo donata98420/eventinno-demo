@@ -13,10 +13,11 @@ import java.util.List;
 public class TeamRegistration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teamRegistration_sequence")
+    @SequenceGenerator(name = "teamRegistration_sequence", allocationSize = 1)
     private Long id;
 
-    @Column(name ="name", unique = true)
+    @Column(name ="name")
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)

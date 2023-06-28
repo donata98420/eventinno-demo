@@ -7,6 +7,5 @@ import java.util.Optional;
 public interface MentorRepository extends JpaRepository <Mentor, Long> {
 
     void deleteById(Long id);
-
-    Optional<Object> findByEmail(String email);
+    Optional<Mentor> findByEmail(String email);
 }

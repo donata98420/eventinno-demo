@@ -1,58 +1,62 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.EventDto;
-import hr.donata.eventinnodemo.dto.TeamRegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import java.util.List;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
-public class EventServiceImpl implements EventService{
+public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final TeamRegistrationService teamRegistrationService;
-
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, TeamRegistrationService teamRegistrationService) {
-        this.eventRepository = eventRepository;
-        this.eventMapper = eventMapper;
-        this.teamRegistrationService = teamRegistrationService;
-    }
-
 
     @Override
     public void create(EventDto eventDto) {
         try {
             if (eventRepository.findByName(eventDto.getName()).isPresent()) {
-                throw new BadRequestException("Sorry, this team name already exists.");
+                throw new BadRequestException("Sorry, this event name already exists. Use another one.");
             }
 
-            List<TeamRegistrationDto> teamRegistrationDtos = eventDto.getTeams();
+            // Converting
+            String registrationsNotAfterString = eventDto.getRegistrationsNotAfter()
+                    .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            String confirmationNotAfterString = eventDto.getConfirmationNotAfter()
+                    .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+            String registrationsNotBeforeString = eventDto.getRegistrationsNotBefore()
+                    .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
 
-            if (teamRegistrationDtos.stream().map(TeamRegistrationDto::getName).distinct().count() != teamRegistrationDtos.size()) {
-                throw new BadRequestException("Multiple teams have the same name.");
-            }
-
+            // Creating Event
             Event event = eventMapper.eventDtoToEvent(eventDto);
+            event.setRegistrationsNotAfter(ZonedDateTime.parse(registrationsNotAfterString));
+            event.setConfirmationNotAfter(ZonedDateTime.parse(confirmationNotAfterString));
+            event.setRegistrationsNotBefore(ZonedDateTime.parse(registrationsNotBeforeString));
+
+            // Saving event
             event = eventRepository.save(event);
 
-            for (TeamRegistrationDto teamRegistrationDto : teamRegistrationDtos) {
-                teamRegistrationDto.setEventId(event.getId());
-                teamRegistrationService.create(teamRegistrationDto);
-            }
+            // Saving TeamRegistration
+            teamRegistrationService.save(eventDto.getTeams(), event);
         } catch (DataIntegrityViolationException e) {
-            throw new BadRequestException("This event name already exists. Try with another one.");
-        } catch (BadRequestException e) {
-            throw e;
+            throw new RuntimeException("This event name already exists. Try with another one.", e);
         } catch (Exception e) {
             throw new RuntimeException("Oops. An unexpected error occurred.", e);
         }
+    }
+
+    @Override
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -60,10 +64,5 @@ public class EventServiceImpl implements EventService{
         public BadRequestException(String message) {
             super(message);
         }
-    }
-
-    @Override
-    public void deleteEvent(Long id) {
-        eventRepository.deleteById(id);
     }
 }

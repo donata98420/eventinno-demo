@@ -31,7 +31,7 @@ public class MentorServiceImpl implements MentorService {
     @Override
     public void create(MentorDto mentorDto) {
         if (mentorRepository.findByEmail(mentorDto.getEmail()).isPresent()) {
-            throw new BadRequestException("Sorry, this mentor email already exists.");
+            throw new EventServiceImpl.BadRequestException("Sorry, this mentor already exists. Try with another one.");
         }
 
         TeamRegistration teamRegistration = teamRegistrationRepository.findById(mentorDto.getTeamRegistrationId())
@@ -40,12 +40,6 @@ public class MentorServiceImpl implements MentorService {
         Mentor mentor = mentorMapper.mentorDtoToMentor(mentorDto);
         mentor.setTeamRegistration(teamRegistration);
         mentorRepository.save(mentor);
-    }
-
-    public static class BadRequestException extends RuntimeException {
-        public BadRequestException(String message) {
-            super(message);
-        }
     }
 
     public static class NotFoundException extends RuntimeException {

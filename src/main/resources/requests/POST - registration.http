@@ -1,0 +1,130 @@
+### SBSS 02 - Create Registration (OK)
+POST localhost:8095/event/event_id/registrations
+Content-Type: application/json
+
+{
+  "personal": {
+    "name": {
+      "first": "Ivan",
+      "last": "Horvat"
+    },
+    "email": "ivan.horvat@ag04.com",
+    "phone": "+385 99 292 8111",
+    "education": {
+      "faculty": "TVZ",
+      "year": 3
+    },
+    "summary": "Interested in Games and Boardgames, a geek at heart. :)"
+  },
+  "experience": {
+    "years": 2,
+    "skills": [
+      "API",
+      "Spring",
+      "Spring Boot",
+      "Java",
+      "Hibernate",
+      "JPA"
+    ],
+    "repositoryUrl": "https://bitbucket.org/ihorvat",
+    "summary": "I worked on technologies such as Spring Boot, Hibernate and JPA."
+  },
+  "motivation": "I want to expand my knowledge on Spring Boot.",
+  "preferredOS": "macOS"
+}
+
+> {%
+    client.test("Response status is 201", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    client.test("Response location (header) includes /registration/", function() {
+        var location = response.headers.get("location");
+        client.assert(location.includes("/registration/"), "Expected 'Header: Location /event/<event_id>/registrations/<registration_id>' but received '" + location + "'");
+    });
+%}
+
+### SBSS 02 - Create Registration (Same name)
+POST localhost:8095/event/event_id/registrations
+Content-Type: application/json
+
+{
+  "name": "Spring Boot Summer School 2019",
+  "maxParticipants": 36,
+  "teams": [
+    {
+      "name": "Amber"
+    },
+    {
+      "name": "Loom"
+    },
+    {
+      "name": "Metropolis"
+    },
+    {
+      "name": "Panama"
+    },
+    {
+      "name": "Skara"
+    },
+    {
+      "name": "Valhalla",
+      "mentors": [
+        "nikola.masic@ag04.com",
+        "mia.matic@ag04.com"
+      ]
+    }
+  ],
+  "registrationsNotBefore": "2019-07-01T00:00:00+01:00",
+  "registrationsNotAfter": "2019-07-31T23:59:59+01:00",
+  "confirmationNotAfter": "2019-08-10T23:59:59+01:00",
+  "startDate": "2019-08-15",
+  "weeks": 5
+}
+
+> {%
+    client.test("Response status is 400", function() {
+        client.assert(response.status === 400, "Response status is not 400");
+    });
+%}
+
+### SBSS 02 - Method not allowed (405)
+POST localhost:8095/event/event_id/registrations
+Content-Type: application/json
+
+{
+  "personal": {
+    "name": {
+      "first": "Ivan",
+      "last": "Horvat"
+    },
+    "email": "ivan.horvat@ag04.com",
+    "phone": "+385 99 292 8111",
+    "education": {
+      "faculty": "TVZ",
+      "year": 3
+    },
+    "summary": "Interested in Games and Boardgames, a geek at heart. :)"
+  },
+  "experience": {
+    "years": 2,
+    "skills": [
+      "API",
+      "Spring",
+      "Spring Boot",
+      "Java",
+      "Hibernate",
+      "JPA"
+    ],
+    "repositoryUrl": "https://bitbucket.org/ihorvat",
+    "summary": "I worked on technologies such as Spring Boot, Hibernate and JPA."
+  },
+  "motivation": "I want to expand my knowledge on Spring Boot.",
+  "preferredOS": "macOS"
+}
+
+> {%
+    client.test("Response status is 405", function() {
+        client.assert(response.status === 405, "Response status is not 405");
+    });
+%}

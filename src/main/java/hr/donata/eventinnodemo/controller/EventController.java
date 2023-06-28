@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.*;
 public class EventController {
     private final EventService eventService;
     public EventController(EventService eventService) {
-
         this.eventService = eventService;
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/event")
     private ResponseEntity<EventDto> saveEvent(@RequestBody EventDto eventDto) {
         eventService.create(eventDto);
         return ResponseEntity.ok(eventDto);
     }
-
     @DeleteMapping(path = "/delete/{id}")
     private ResponseEntity<String> deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);

@@ -8,31 +8,27 @@ import hr.donata.eventinnodemo.mapper.TeamRegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.TeamRegistrationRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TeamRegistrationServiceImpl implements TeamRegistrationService {
     private final TeamRegistrationRepository teamRegistrationRepository;
     private final TeamRegistrationMapper teamRegistrationMapper;
     private final EventRepository eventRepository;
     private final MentorService mentorService;
 
-    public TeamRegistrationServiceImpl(TeamRegistrationRepository teamRegistrationRepository,
-                                       TeamRegistrationMapper teamRegistrationMapper,
-                                       EventRepository eventRepository,
-                                       MentorService mentorService) {
-        this.teamRegistrationRepository = teamRegistrationRepository;
-        this.teamRegistrationMapper = teamRegistrationMapper;
-        this.eventRepository = eventRepository;
-        this.mentorService = mentorService;
-    }
-
     @Override
     public void create(TeamRegistrationDto teamRegistrationDto) {
+        String teamRegistrationName = teamRegistrationDto.getName();
+        if (teamRegistrationRepository.existsByName(teamRegistrationName)) {
+            throw new DuplicateTeamRegistrationException("A team registration with the same name already exists.");
+        }
+
         Event event = eventRepository.findById(teamRegistrationDto.getEventId())
                 .orElseThrow(() -> new EntityNotFoundException("Event not found."));
 
@@ -46,6 +42,11 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
             mentorDto.setTeamRegistrationId(teamRegistration.getId());
             mentorService.create(mentorDto);
         }
+    }
+
+    @Override
+    public void save(List<TeamRegistrationDto> teams, Event event) {
+
     }
 
     private void validateMentors(List<MentorDto> mentorDtos) {
@@ -64,15 +65,24 @@ public class TeamRegistrationServiceImpl implements TeamRegistrationService {
         teamRegistrationRepository.deleteById(id);
     }
 
-    public static class BadRequestException extends IllegalArgumentException {
-        public BadRequestException(String message) {
+    //Dupli timovi
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class DuplicateTeamRegistrationException extends BadRequestException {
+        public DuplicateTeamRegistrationException(String message) {
             super(message);
         }
     }
 
+    //Dupli mentori
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class DuplicateMentorEmailException extends BadRequestException {
         public DuplicateMentorEmailException(String message) {
+            super(message);
+        }
+    }
+
+    public static class BadRequestException extends RuntimeException {
+        public BadRequestException(String message) {
             super(message);
         }
     }
