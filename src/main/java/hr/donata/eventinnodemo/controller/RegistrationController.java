@@ -2,6 +2,7 @@ package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import org.springframework.http.ResponseEntity;
+import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 public class ScoreServiceImpl implements ScoreService{
     @Override
     public int calculateScore(Registration registration) {
-        return 0;
+
+
+
+
+
     }
 }

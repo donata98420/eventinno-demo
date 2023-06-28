@@ -1,17 +1,16 @@
+package hr.donata.eventinnodemo.service;
+
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
-import hr.donata.eventinnodemo.service.RegistrationService;
-import hr.donata.eventinnodemo.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,13 +58,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         registrationRepository.save(registration);
 
-     
         return ResponseEntity.status(HttpStatus.CREATED).body("Registration is successfully created.");
     }
 
     @Override
     public void deleteRegistration(Long id) {
-
         registrationRepository.deleteById(id);
     }
 
@@ -93,3 +90,5 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
 }
+
+
