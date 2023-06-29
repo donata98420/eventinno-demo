@@ -32,4 +32,7 @@ public class RegistrationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    //GET
+    //@GetMapping
 }
