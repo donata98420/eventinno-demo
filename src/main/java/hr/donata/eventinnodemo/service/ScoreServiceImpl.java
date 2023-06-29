@@ -20,7 +20,7 @@ public class ScoreServiceImpl implements ScoreService{
         // += for scoring incrementally
 
         // for education = 2 points
-        int educationPoints = registration.getExperience().getYears() * 2;
+        int educationPoints = registration.getExperience().getEducationYears() * 2;
         score += educationPoints;
 
         // for experience = 5 points
