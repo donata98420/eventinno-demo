@@ -23,4 +23,6 @@ public class Experience {
     private String summary;
 
 
+    public int getEducationYears() {
+    }
 }
