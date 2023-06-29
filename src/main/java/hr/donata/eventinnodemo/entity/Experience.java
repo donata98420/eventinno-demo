@@ -21,11 +21,7 @@ public class Experience {
     private String repositoryUrl;
     @Column(name ="summary")
     private String summary;
-
-
-    public int getEducationYears() {
-
-    }
     public int getExperienceYears() {
+        return years;
     }
 }
