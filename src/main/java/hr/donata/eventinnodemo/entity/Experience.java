@@ -24,5 +24,8 @@ public class Experience {
 
 
     public int getEducationYears() {
+
+    }
+    public int getExperienceYears() {
     }
 }
