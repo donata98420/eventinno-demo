@@ -22,5 +22,10 @@ public class Education {
     @Column(name ="year")
     private int year;
 
+    public int getEducationYears() {
+        return year;
+
+    }
+
 
 }
