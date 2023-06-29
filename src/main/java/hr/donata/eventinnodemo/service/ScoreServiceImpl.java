@@ -10,11 +10,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScoreServiceImpl implements ScoreService{
 
-    /*
-    private final education
-    private final experience
-            ...
-    */
+    private static final String[] JAVA_SKILLS = { "Java", "Spring", "Spring Boot" };
+    private static final String[] OTHER_SKILLS = { "Hibernate", "JPA", "Scala" };
+
 
     @Override
     public int calculateScore(Registration registration) {
@@ -42,6 +40,22 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     private int calculateSkillsPoints(List<String> skills) {
+
+
+
+        int points = 0;
+
+        for (String skill : skills) {
+            if (containsIgnoreCase(JAVA_SKILLS, skill)) {
+                points += 20;
+            } else if (containsIgnoreCase(OTHER_SKILLS, skill)) {
+                points += 10;
+            } else {
+                points += 5;
+            }
+        }
+
+        return points;
     }
 
 
