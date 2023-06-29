@@ -58,8 +58,16 @@ public class ScoreServiceImpl implements ScoreService{
         return points;
     }
 
-
-
-
+    // if there exists a target value
+    private boolean containsIgnoreCase(String[] array, String targetValue) {
+        for (String value : array) {
+            if (value.equalsIgnoreCase(targetValue)) {
+                return true;
+            }
+        }
+        return false;
     }
+
+
+
 }
