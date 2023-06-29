@@ -16,15 +16,15 @@ public class ScoreServiceImpl implements ScoreService{
 
     @Override
     public int calculateScore(Registration registration) {
-
         int score = 0;
+        // += for scoring incrementally
 
-        //  for education = 2 points
-        int educationPoints = registration.getExperience().getEducationYears() * 2;
+        // for education = 2 points
+        int educationPoints = registration.getExperience().getYears() * 2;
         score += educationPoints;
 
         // for experience = 5 points
-        int experiencePoints = registration.getExperience().getExperienceYears() * 5;
+        int experiencePoints = registration.getExperience().getYears() * 5;
         score += experiencePoints;
 
         // points for skills = 20 points for Java, Spring, SB
@@ -40,9 +40,6 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     private int calculateSkillsPoints(List<String> skills) {
-
-
-
         int points = 0;
 
         for (String skill : skills) {
@@ -67,7 +64,4 @@ public class ScoreServiceImpl implements ScoreService{
         }
         return false;
     }
-
-
-
 }
