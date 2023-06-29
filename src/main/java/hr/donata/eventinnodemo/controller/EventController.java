@@ -24,4 +24,7 @@ public class EventController {
         eventService.deleteEvent(id);
         return ResponseEntity.ok("You deleted one event from the database.");
     }
+
+    //GET
+    //@GetMapping
 }
