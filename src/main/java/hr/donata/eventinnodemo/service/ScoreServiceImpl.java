@@ -3,16 +3,13 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.entity.Registration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ScoreServiceImpl implements ScoreService{
-
     private static final String[] JAVA_SKILLS = { "Java", "Spring", "Spring Boot" };
     private static final String[] OTHER_SKILLS = { "Hibernate", "JPA", "Scala" };
-
 
     @Override
     public int calculateScore(Registration registration) {
@@ -38,7 +35,6 @@ public class ScoreServiceImpl implements ScoreService{
 
         return score;
     }
-
     private int calculateSkillsPoints(List<String> skills) {
         int points = 0;
 
