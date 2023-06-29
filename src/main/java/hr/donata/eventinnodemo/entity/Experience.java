@@ -22,5 +22,7 @@ public class Experience {
     @Column(name ="summary")
     private String summary;
 
-
+    public int getEducationYears() {
+        return years;
+    }
 }

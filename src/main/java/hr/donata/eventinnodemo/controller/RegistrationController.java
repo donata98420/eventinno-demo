@@ -1,23 +1,20 @@
 package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.RegistrationDto;
-import hr.donata.eventinnodemo.service.EventService;
-import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.http.ResponseEntity;
+import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
     private final RegistrationService registrationService;
-    private final EventService eventService;
 
-    public RegistrationController(RegistrationService registrationService, EventService eventService) {
+    public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
-        this.eventService = eventService;
     }
 
-    @PostMapping(path = "/{event_id}/registrations")
+    @PostMapping("/{event_id}/registrations")
     public ResponseEntity<String> saveRegistration(@RequestBody RegistrationDto registrationDto, @PathVariable("event_id") Long eventId) {
         ResponseEntity<String> response = registrationService.create(registrationDto, eventId);
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
@@ -31,10 +28,8 @@ public class RegistrationController {
         try {
             registrationService.deleteRegistrationForEvent(registrationId, eventId);
             return ResponseEntity.ok("Registration is successfully deleted.");
-
-            //   /registration/{registrationId}/events/{eventId}
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    }
+}
