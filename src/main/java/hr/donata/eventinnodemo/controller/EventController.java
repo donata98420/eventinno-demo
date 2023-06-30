@@ -1,9 +1,13 @@
 package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.EventDto;
+import hr.donata.eventinnodemo.entity.Event;
+import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/event")
@@ -25,6 +29,14 @@ public class EventController {
         return ResponseEntity.ok("You deleted one event from the database.");
     }
 
-    //GET
-    //@GetMapping
+    //GET - by id
+
+    @GetMapping("/event/{event_id}/r")
+    private ResponseEntity<Event> getById(@PathVariable Long id) {
+        Optional<Event> optionalEvent = eventService.getEventById(id);
+        if (optionalEvent.isPresent()) {
+            return ResponseEntity.ok(optionalEvent.get());
+        }
+        throw new RuntimeException("This event does not exists.");
+    }
 }
