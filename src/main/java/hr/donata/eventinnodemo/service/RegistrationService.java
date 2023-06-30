@@ -10,6 +10,5 @@ public interface RegistrationService {
     void deleteRegistration(Long id);
     void deleteRegistrationForEvent(Long registrationId, Long eventId);
     Optional<Registration> getRegistrationById(Long registrationId);
-
-    void updateRegistration(Registration registration);
+    void updateRegistrationScore(Long eventId, Long registrationId, RegistrationDto registrationDto);
 }
