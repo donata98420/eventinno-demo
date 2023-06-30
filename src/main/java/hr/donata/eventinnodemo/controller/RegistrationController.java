@@ -1,5 +1,6 @@
 package hr.donata.eventinnodemo.controller;
 
+import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.ManualScore;
 import hr.donata.eventinnodemo.service.EventService;
@@ -40,9 +41,9 @@ public class RegistrationController {
     @PutMapping("/event/<event_id>/registrations/<registration_id>/score")
     public ResponseEntity<String> scoreRegistration(
             @PathVariable("registrationId") Long registrationId,
-            @RequestBody ManualScore manualScore) {
+            @RequestBody ManualScoreDto manualScoreDto) {
 
-        registrationService.scoreRegistration(registrationId, manualScore);
+        registrationService.scoreRegistration(registrationId, manualScoreDto);
         return ResponseEntity.ok("Your registration is successfully scored.");
     }
 
