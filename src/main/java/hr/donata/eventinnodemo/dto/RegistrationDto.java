@@ -23,4 +23,8 @@ public class RegistrationDto {
 
         return score;
     }
+
+    public String getComment() {
+        return comments;
+    }
 }
