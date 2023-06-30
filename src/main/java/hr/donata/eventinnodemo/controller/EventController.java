@@ -73,6 +73,7 @@ public class EventController {
             // Returning updated
             return ResponseEntity.ok(registrationDto);
         } else {
+            // HTTP 404
             return ResponseEntity.notFound().build();
         }
     }
