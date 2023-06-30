@@ -40,4 +40,7 @@ public class Registration {
     @Column(name ="score")
     private int score;
 
+    @Column(name ="comments")
+    private String comments;
+
 }
