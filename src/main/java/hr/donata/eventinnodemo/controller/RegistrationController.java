@@ -2,6 +2,7 @@ package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Registration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class RegistrationController {
         }
     }
 
-    //GET
+    // GET - by id
     @GetMapping("/event/{event_id}/registrations/{registration_id}")
     private ResponseEntity<Registration> getById(@PathVariable Long id) {
         Optional<Registration> optionalRegistration = registrationService.getRegistrationById(id);
@@ -45,5 +46,6 @@ public class RegistrationController {
         }
         throw new RuntimeException("This registration does not exists.");
     }
+
 
 }

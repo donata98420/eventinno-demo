@@ -10,4 +10,6 @@ public interface RegistrationService {
     void deleteRegistration(Long id);
     void deleteRegistrationForEvent(Long registrationId, Long eventId);
     Optional<Registration> getRegistrationById(Long id);
+
+    Object getAllRegistrations();
 }
