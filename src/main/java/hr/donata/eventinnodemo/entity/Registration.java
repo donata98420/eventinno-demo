@@ -38,4 +38,7 @@ public class Registration {
     private String preferredOs;
     public void setScore(int score) {
     }
+
+    public void setManualScore(ManualScore manualScore) {
+    }
 }
