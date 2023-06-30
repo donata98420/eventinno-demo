@@ -84,6 +84,15 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
 
+    @Override
+    public Optional<Registration> getRegistrationById(Long registrationId) {
+        return registrationRepository.findById(registrationId);
+    }
+
+    @Override
+    public void updateRegistration(Registration registration) {
+        registrationRepository.save(registration);
+    }
 
 
     public static class MethodNotAllowedException extends RuntimeException {
