@@ -9,6 +9,5 @@ public interface RegistrationService {
     ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId);
     void deleteRegistration(Long id);
     void deleteRegistrationForEvent(Long registrationId, Long eventId);
-    Optional<Registration> getRegistrationById(Long id);
 
 }
