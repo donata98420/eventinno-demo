@@ -29,14 +29,5 @@ public class EventController {
         return ResponseEntity.ok("You deleted one event from the database.");
     }
 
-    //GET - by id
 
-    @GetMapping("/event/{event_id}/r")
-    private ResponseEntity<Event> getById(@PathVariable Long id) {
-        Optional<Event> optionalEvent = eventService.getEventById(id);
-        if (optionalEvent.isPresent()) {
-            return ResponseEntity.ok(optionalEvent.get());
-        }
-        throw new RuntimeException("This event does not exists.");
-    }
 }
