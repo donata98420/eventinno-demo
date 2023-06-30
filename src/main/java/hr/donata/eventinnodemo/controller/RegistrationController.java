@@ -1,6 +1,7 @@
 package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.RegistrationDto;
+import hr.donata.eventinnodemo.entity.ManualScore;
 import hr.donata.eventinnodemo.service.EventService;
 import org.springframework.http.ResponseEntity;
 import hr.donata.eventinnodemo.service.RegistrationService;
@@ -30,13 +31,20 @@ public class RegistrationController {
 
         try {
             registrationService.deleteRegistrationForEvent(registrationId, eventId);
-            return ResponseEntity.ok("Registration is successfully deleted.");
+            return ResponseEntity.ok("Your registration is successfully deleted.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    @PutMapping("/{registrationId}/score")
+    public ResponseEntity<String> scoreRegistration(
+            @PathVariable("registrationId") Long registrationId,
+            @RequestBody ManualScore manualScore) {
 
+        registrationService.scoreRegistration(registrationId, manualScore);
+        return ResponseEntity.ok("Your registration is successfully scored.");
+    }
 
 
 }
