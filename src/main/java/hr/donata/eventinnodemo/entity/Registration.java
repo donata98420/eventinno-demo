@@ -36,9 +36,9 @@ public class Registration {
     private String motivation;
     @Column(name ="preferredOs")
     private String preferredOs;
+
     public void setScore(int score) {
     }
-
-    public void setManualScore(ManualScore manualScore) {
+    public void setManualScore(int manualScore) {
     }
 }
