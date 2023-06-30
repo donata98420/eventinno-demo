@@ -11,5 +11,4 @@ public interface RegistrationService {
     void deleteRegistrationForEvent(Long registrationId, Long eventId);
     Optional<Registration> getRegistrationById(Long id);
 
-    Object getAllRegistrations();
 }
