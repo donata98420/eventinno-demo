@@ -2,6 +2,7 @@ package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
+import hr.donata.eventinnodemo.entity.ManualScore;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
@@ -83,15 +84,23 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new IllegalArgumentException("Sorry, the registration is not found.");
         }
     }
-
     @Override
-    public Optional<Registration> getRegistrationById(Long registrationId) {
-        return registrationRepository.findById(registrationId);
-    }
+    public void scoreRegistration(Long registrationId, ManualScore manualScore) {
+        Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
+        if (registrationOptional.isPresent()) {
+            Registration registration = registrationOptional.get();
 
-    @Override
-    public void updateRegistration(Registration registration) {
-        registrationRepository.save(registration);
+            registration.setManualScore(manualScore);
+
+            // Updating
+            int score = scoreService.calculateScore(registration);
+            registration.setScore(score);
+
+            // Saving
+            registrationRepository.save(registration);
+        } else {
+            throw new IllegalArgumentException("Sorry, but your registration is not found.");
+        }
     }
 
 
