@@ -40,10 +40,10 @@ public class RegistrationController {
     @GetMapping("/event/{event_id}/registrations/{registration_id}")
     private ResponseEntity<Registration> getById(@PathVariable Long id) {
         Optional<Registration> optionalRegistration = registrationService.getRegistrationById(id);
-        if(optionalRegistration.isPresent()) {
+        if (optionalRegistration.isPresent()) {
             return ResponseEntity.ok(optionalRegistration.get());
         }
         throw new RuntimeException("This registration does not exists.");
-
+    }
 
 }
