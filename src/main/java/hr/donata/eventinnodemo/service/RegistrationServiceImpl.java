@@ -89,10 +89,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         return registrationRepository.findById(id);
     }
 
-    @Override
-    public Object getAllRegistrations() {
-        return registrationRepository.findAll();
-    }
 
     public static class MethodNotAllowedException extends RuntimeException {
         public MethodNotAllowedException(String message, String name) {
