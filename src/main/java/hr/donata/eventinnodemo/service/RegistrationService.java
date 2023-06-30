@@ -3,7 +3,6 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Registration;
 import org.springframework.http.ResponseEntity;
-
 import java.util.Optional;
 
 public interface RegistrationService {
