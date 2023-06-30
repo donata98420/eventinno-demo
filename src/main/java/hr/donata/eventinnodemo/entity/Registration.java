@@ -37,12 +37,5 @@ public class Registration {
     @Column(name ="preferredOs")
     private String preferredOs;
 
-    @Column(name ="score")
-    private int score;
 
-    @Column(name ="comments")
-    private String comments;
-
-    public void setComment(String comment) {
-    }
 }
