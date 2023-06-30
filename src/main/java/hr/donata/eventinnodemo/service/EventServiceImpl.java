@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -57,6 +58,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Event> getEventById(Long eventId) {
+        return eventRepository.findById(eventId);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
