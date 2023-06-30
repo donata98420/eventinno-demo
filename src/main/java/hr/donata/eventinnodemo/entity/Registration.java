@@ -43,4 +43,6 @@ public class Registration {
     @Column(name ="comments")
     private String comments;
 
+    public void setComment(String comment) {
+    }
 }
