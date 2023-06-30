@@ -17,14 +17,5 @@ public class RegistrationDto {
 
     private Education education;
 
-    private String comments;
 
-    public String getScore() {
-
-        return score;
-    }
-
-    public String getComment() {
-        return comments;
-    }
 }
