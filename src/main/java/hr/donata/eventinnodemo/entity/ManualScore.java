@@ -19,8 +19,8 @@ public class ManualScore {
     @SequenceGenerator(name = "manualScore_sequence", allocationSize = 1)
     private Long id;
 
-    @Column(name ="score")
-    private String score;
+    @Column(name ="manualScore")
+    private String manualScore;
     @Column(name ="comment")
     private String comment;
 
