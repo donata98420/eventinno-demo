@@ -1,15 +1,11 @@
 package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.EventDto;
-import hr.donata.eventinnodemo.dto.RegistrationDto;
-import hr.donata.eventinnodemo.entity.Event;
-import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.service.EventService;
 import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/event")
