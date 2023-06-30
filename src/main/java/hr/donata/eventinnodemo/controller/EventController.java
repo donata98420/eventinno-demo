@@ -51,11 +51,14 @@ public class EventController {
             if (score.startsWith("+")) {
                 int pointsToAdd = Integer.parseInt(score.substring(1));
                 registration.setScore(registration.getScore() + pointsToAdd);
+
             } else if (score.startsWith("-")) {
                 int pointsToSubtract = Integer.parseInt(score.substring(1));
                 registration.setScore(registration.getScore() - pointsToSubtract);
             } else {
-                return ResponseEntity.badRequest().body("Invalid score format. Please use '+<number>' or '-<number>'.");
+
+                // HTTP 400
+                return ResponseEntity.badRequest().body(registrationDto);
             }
 
             // Possible comments
