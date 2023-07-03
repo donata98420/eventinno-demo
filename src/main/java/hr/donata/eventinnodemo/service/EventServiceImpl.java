@@ -48,10 +48,11 @@ public class EventServiceImpl implements EventService {
             throw new BadRequestException("Event with ID " + eventId + " not found.");
         }
 
+
         Event event = eventOptional.get();
         Optional<Registration> registrationOptional = event.getRegistrations().stream()
                 .filter(registration -> registration.getId().equals(registrationId))
-                .findFirst();
+                .findFirst(); // vraca prvu
 
         if (registrationOptional.isEmpty()) {
             throw new BadRequestException("Sorry, but registration with ID " + registrationId + " is not found in the event.");
@@ -75,6 +76,7 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
     }
 
+    // Converting
     private int parseScore(String score) {
         try {
             return Integer.parseInt(score);
