@@ -47,5 +47,8 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
     private List<TeamRegistration> teamRegistrationList;
 
+    @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
+    private List<ManualScore> manualScores;
+
 
 }
