@@ -50,7 +50,8 @@ public class Event {
     @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
     private List<ManualScore> manualScores;
 
-    private List<Registration> registration;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Registration> registrations;
     public List<Registration> getRegistrations() {
         return registration;
     }
