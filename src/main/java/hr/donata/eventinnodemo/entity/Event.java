@@ -29,7 +29,6 @@ public class Event {
     @Column(name ="maxParticipant")
     private Byte maxParticipants;
 
-    //
     @Column(name ="registrationsNotAfter")
     private ZonedDateTime registrationsNotAfter;
 
@@ -51,4 +50,8 @@ public class Event {
     @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
     private List<ManualScore> manualScores;
 
+    private List<Registration> registration;
+    public List<Registration> getRegistrations() {
+        return registration;
+    }
 }
