@@ -44,7 +44,7 @@ public class RegistrationController {
             @RequestBody ManualScoreDto manualScoreDto) {
 
         registrationService.scoreRegistration(registrationId, manualScoreDto);
-        return ResponseEntity.ok("Your registration is successfully scored.");
+        return ResponseEntity.ok("Your registration score is successfully scored.");
     }
 
 
