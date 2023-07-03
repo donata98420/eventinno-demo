@@ -4,7 +4,6 @@ import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.ManualScore;
-import hr.donata.eventinnodemo.entity.Personal;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
