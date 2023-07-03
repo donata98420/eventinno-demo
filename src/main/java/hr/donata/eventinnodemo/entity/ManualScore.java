@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ManualScore {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "manualScore_sequence")
     @SequenceGenerator(name = "manualScore_sequence", allocationSize = 1)
@@ -24,5 +24,13 @@ public class ManualScore {
     @Column(name ="comment")
     private String comment;
 
+    @ManyToOne
+    private Registration registration;
 
+
+    public void setScore(int scoreIncrement) {
+    }
+
+    public void setRegistration(Registration registration) {
+    }
 }
