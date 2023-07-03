@@ -1,8 +1,10 @@
 package hr.donata.eventinnodemo.service;
 
+import hr.donata.eventinnodemo.dto.EventDto;
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.ManualScore;
+import hr.donata.eventinnodemo.entity.Personal;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
@@ -21,7 +23,24 @@ public class EventServiceImpl implements EventService {
     private final EventMapper eventMapper;
     private final TeamRegistrationService teamRegistrationService;
 
-    // Other methods...
+
+    @Override
+    public void create(EventDto eventDto) {
+        Event event = eventMapper.eventDtoToEvent(eventDto);
+        eventRepository.save(event);
+
+    }
+
+    @Override
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
+
+    }
+
+    @Override
+    public Optional<Event> getEventById(Long eventId) {
+        return Optional.empty();
+    }
 
     @Override
     public void updateRegistrationScore(Long eventId, Long registrationId, ManualScoreDto manualScoreDto) {
@@ -42,7 +61,7 @@ public class EventServiceImpl implements EventService {
         Registration registration = registrationOptional.get();
         int scoreIncrement = parseScore(manualScoreDto.getScore());
 
-        // Updating score in Registration
+        // Updating score
         int currentScore = registration.getScore();
         registration.setScore(currentScore + scoreIncrement);
 
