@@ -37,11 +37,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Optional<Event> getEventById(Long eventId) {
-        return Optional.empty();
-    }
-
-    @Override
     public void updateRegistrationScore(Long eventId, Long registrationId, ManualScoreDto manualScoreDto) {
         Optional<Event> eventOptional = eventRepository.findById(eventId);
         if (eventOptional.isEmpty()) {
