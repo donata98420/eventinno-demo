@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -39,6 +41,9 @@ public class Registration {
 
     @Column(name ="score")
     private int score;
+
+    @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
+    private List<ManualScore> manualScores;
 
     public void setScore(int score) {
     }

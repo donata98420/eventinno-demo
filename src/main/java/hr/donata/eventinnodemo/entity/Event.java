@@ -7,6 +7,7 @@ import org.springframework.cglib.core.Local;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -49,6 +50,5 @@ public class Event {
 
     @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
     private List<ManualScore> manualScores;
-
 
 }
