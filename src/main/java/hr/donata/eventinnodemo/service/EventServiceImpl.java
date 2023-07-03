@@ -1,6 +1,7 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.EventDto;
+import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
@@ -63,6 +64,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public Optional<Event> getEventById(Long eventId) {
         return eventRepository.findById(eventId);
+    }
+
+    @Override
+    public void updateRegistrationScore(Long eventId, Long registrationId, ManualScoreDto manualScoreDto) {
+
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
