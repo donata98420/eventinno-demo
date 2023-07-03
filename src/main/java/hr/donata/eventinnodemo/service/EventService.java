@@ -10,7 +10,6 @@ public interface EventService {
 
     void create(EventDto eventDto);
     void deleteEvent(Long id);
-
     Optional<Event> getEventById(Long eventId);
-    void updateRegistrationScore(Long eventId, Long registrationId, ManualScoreDto manualScoreDto);
+
 }

@@ -1,10 +1,7 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.EventDto;
-import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.entity.Event;
-import hr.donata.eventinnodemo.entity.ManualScore;
-import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.EventMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,50 +36,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public Optional<Event> getEventById(Long eventId) {
         return eventRepository.findById(eventId);
-    }
-
-    @Override
-    public void updateRegistrationScore(Long eventId, Long registrationId, ManualScoreDto manualScoreDto) {
-        Optional<Event> eventOptional = eventRepository.findById(eventId);
-        if (eventOptional.isEmpty()) {
-            throw new BadRequestException("Event with ID " + eventId + " not found.");
-        }
-
-
-        Event event = eventOptional.get();
-        Optional<Registration> registrationOptional = event.getRegistrations().stream()
-                .filter(registration -> registration.getId().equals(registrationId))
-                .findFirst(); // vraca prvu
-
-        if (registrationOptional.isEmpty()) {
-            throw new BadRequestException("Sorry, but registration with ID " + registrationId + " is not found in the event.");
-        }
-
-        Registration registration = registrationOptional.get();
-        int scoreIncrement = parseScore(manualScoreDto.getScore());
-
-        // Updating score
-        int currentScore = registration.getScore();
-        registration.setScore(currentScore + scoreIncrement);
-
-        // Saving ManualScore
-        ManualScore manualScore = new ManualScore();
-        manualScore.setManualScore(manualScoreDto.getScore());
-        manualScore.setComment(manualScoreDto.getComment());
-        manualScore.setRegistration(registration);
-        registration.getManualScores().add(manualScore);
-
-        // Saving changes
-        eventRepository.save(event);
-    }
-
-    // Converting
-    private int parseScore(String score) {
-        try {
-            return Integer.parseInt(score);
-        } catch (NumberFormatException e) {
-            throw new BadRequestException("Invalid score format. Score must be an integer.");
-        }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
