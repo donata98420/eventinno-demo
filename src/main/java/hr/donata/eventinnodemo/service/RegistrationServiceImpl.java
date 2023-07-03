@@ -3,6 +3,7 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
+import hr.donata.eventinnodemo.entity.ManualScore;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
@@ -95,6 +96,13 @@ public class RegistrationServiceImpl implements RegistrationService {
             int manualScore = Integer.parseInt(manualScoreDto.getScore());
 
             registration.setManualScore(manualScore);
+
+            // Saving ManualScore
+            ManualScore manualScoreEntity = new ManualScore();
+            manualScoreEntity.setManualScore(String.valueOf(manualScore));
+            manualScoreEntity.setComment(manualScoreDto.getComment());
+            manualScoreEntity.setRegistration(registration);
+            registration.getManualScores().add(manualScoreEntity);
 
             // Updating
             int calculatedScore = scoreService.calculateScore(registration);
