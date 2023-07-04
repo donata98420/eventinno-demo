@@ -95,8 +95,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             int manualScore = Integer.parseInt(manualScoreDto.getScore());
 
-            registration.setManualScore(manualScore);
-
             // Saving ManualScore
             ManualScore manualScoreEntity = new ManualScore();
             manualScoreEntity.setManualScore(String.valueOf(manualScore));
