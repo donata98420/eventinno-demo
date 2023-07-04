@@ -24,13 +24,8 @@ public class ManualScore {
     @Column(name ="comment")
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "registration_id", referencedColumnName = "id")
     private Registration registration;
 
-
-    public void setScore(int scoreIncrement) {
-    }
-
-    public void setRegistration(Registration registration) {
-    }
 }
