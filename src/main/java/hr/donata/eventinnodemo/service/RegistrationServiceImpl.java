@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -87,7 +89,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
     // Manually scoring
     @Override
-    public void scoreRegistration(Long registrationId, ManualScoreDto manualScoreDto) {
+    public ResponseEntity<Object> scoreRegistration(Long registrationId, ManualScoreDto manualScoreDto) {
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
 
         if (registrationOptional.isPresent()) {
@@ -108,8 +110,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             // Saving
             registrationRepository.save(registration);
+
+            return ResponseEntity.noContent().build();
         } else {
-            throw new IllegalArgumentException("Sorry, but your registration is not found.");
+            // returning HTTP 204
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sorry, but your registration is not found.");
         }
     }
 
