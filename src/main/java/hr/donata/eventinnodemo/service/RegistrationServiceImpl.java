@@ -3,7 +3,6 @@ package hr.donata.eventinnodemo.service;
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
-import hr.donata.eventinnodemo.entity.ManualScore;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -103,12 +101,6 @@ public class RegistrationServiceImpl implements RegistrationService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed score field! Score must have an integer value.");
             }
 
-            // Saving ManualScore
-            ManualScore manualScoreEntity = new ManualScore();
-            manualScoreEntity.setManualScore(String.valueOf(manualScore));
-            manualScoreEntity.setComment(manualScoreDto.getComment());
-            manualScoreEntity.setRegistration(registration);
-            registration.getManualScores().add(manualScoreEntity);
 
             // Saving
             registrationRepository.save(registration);
