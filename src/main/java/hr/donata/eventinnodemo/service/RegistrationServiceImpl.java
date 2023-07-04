@@ -97,6 +97,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             int manualScore = Integer.parseInt(manualScoreDto.getScore());
 
+            try {
+                manualScore = Integer.parseInt(manualScoreDto.getScore());
+            } catch (NumberFormatException e) {
+                // returning HTTP 400
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed score field! Score must have an integer value.");
+            }
+
             // Saving ManualScore
             ManualScore manualScoreEntity = new ManualScore();
             manualScoreEntity.setManualScore(String.valueOf(manualScore));
