@@ -1,8 +1,6 @@
 package hr.donata.eventinnodemo.mapper;
 
-
-import hr.donata.eventinnodemo.dto.NameDto;
-import hr.donata.eventinnodemo.entity.Name;
+import hr.donata.eventinnodemo.entity.ManualScore;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -10,8 +8,7 @@ import org.mapstruct.factory.Mappers;
 public interface ManualScoreMapper {
 
     ManualScoreMapper INSTANCE = Mappers.getMapper(ManualScoreMapper.class);
-
-    Name nameDtoToName(NameDto nameDto);
+    ManualScore manualScoreDtoToManualScore(ManualScore manualScore);
 
 
 }
