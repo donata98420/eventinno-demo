@@ -44,9 +44,5 @@ public class Registration {
     @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL)
     private List<ManualScore> manualScores;
 
-    public void setScore(int score) {
-    }
-    public void setManualScore(int manualScore) {
-    }
 
 }
