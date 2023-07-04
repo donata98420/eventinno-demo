@@ -38,7 +38,7 @@ public class RegistrationController {
         }
     }
 
-    @PutMapping("/event/<event_id>/registrations/<registration_id>/score")
+    @PutMapping("/event/{event_id}/registrations/{registration_id}/score")
     public ResponseEntity<String> scoreRegistration(
             @PathVariable("registrationId") Long registrationId,
             @RequestBody ManualScoreDto manualScoreDto) {
