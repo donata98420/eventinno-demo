@@ -110,10 +110,6 @@ public class RegistrationServiceImpl implements RegistrationService {
             manualScoreEntity.setRegistration(registration);
             registration.getManualScores().add(manualScoreEntity);
 
-            // Updating
-            int calculatedScore = scoreService.calculateScore(registration);
-            registration.setScore(calculatedScore);
-
             // Saving
             registrationRepository.save(registration);
 
