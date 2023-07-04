@@ -2,7 +2,6 @@ package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
-import hr.donata.eventinnodemo.entity.ManualScore;
 import hr.donata.eventinnodemo.service.EventService;
 import org.springframework.http.ResponseEntity;
 import hr.donata.eventinnodemo.service.RegistrationService;
