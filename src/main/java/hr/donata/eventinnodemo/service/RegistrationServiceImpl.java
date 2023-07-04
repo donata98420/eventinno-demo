@@ -95,8 +95,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (registrationOptional.isPresent()) {
             Registration registration = registrationOptional.get();
 
-            int manualScore = Integer.parseInt(manualScoreDto.getScore());
-
+            int manualScore;
             try {
                 manualScore = Integer.parseInt(manualScoreDto.getScore());
             } catch (NumberFormatException e) {
