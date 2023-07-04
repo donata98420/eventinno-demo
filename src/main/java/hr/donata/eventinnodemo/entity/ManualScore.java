@@ -13,7 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ManualScore {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "manualScore_sequence")
     @SequenceGenerator(name = "manualScore_sequence", allocationSize = 1)
