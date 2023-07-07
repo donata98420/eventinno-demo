@@ -1,7 +1,6 @@
 package hr.donata.eventinnodemo.dto;
 
 import hr.donata.eventinnodemo.entity.Education;
-import hr.donata.eventinnodemo.entity.Event;
 import lombok.Data;
 import java.util.UUID;
 
