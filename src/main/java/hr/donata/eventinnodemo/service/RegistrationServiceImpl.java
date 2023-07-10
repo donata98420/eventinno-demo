@@ -87,7 +87,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
     // Manually scoring
     @Override
-    public ResponseEntity<Registration> scoreRegistration(Long registrationId, ManualScoreDto manualScoreDto) {
+    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, ManualScoreDto manualScoreDto) {
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
 
         if (registrationOptional.isPresent()) {
@@ -100,7 +100,6 @@ public class RegistrationServiceImpl implements RegistrationService {
                 // returning HTTP 400
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed score field! Score must have an integer value.");
             }
-
 
             // Saving
             registrationRepository.save(registration);
