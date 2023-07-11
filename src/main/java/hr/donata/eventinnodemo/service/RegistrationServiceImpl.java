@@ -7,6 +7,7 @@ import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -107,7 +108,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         // Checking registration and event (+ exception)
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
-        Registration registration = registrationOptional.orElseThrow(() -> new IllegalArgumentException("Registration not found."));
+        Registration registration = registrationOptional.orElseThrow(() -> new EntityNotFoundException("Registration not found."));
 
         Event event = registration.getEvent();
         if (event == null || event.getId() == null || !event.getId().equals(eventId)) {
