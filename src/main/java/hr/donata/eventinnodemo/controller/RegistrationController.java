@@ -18,7 +18,7 @@ public class RegistrationController {
         this.eventService = eventService;
     }
 
-    @PostMapping("/{event_id}/registrations")
+    @PostMapping("/{eventId}/registrations")
     public ResponseEntity<String> saveRegistration(@RequestBody RegistrationDto registrationDto, @PathVariable("event_id") Long eventId) {
         ResponseEntity<String> response = registrationService.create(registrationDto, eventId);
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
@@ -37,7 +37,7 @@ public class RegistrationController {
         }
     }
 
-    @PutMapping("/event/{eventId}/registrations/{registrationId}/score")
+    @PutMapping("/registration/event/{eventId}/registrations/{registrationId}/score")
     public ResponseEntity<RegistrationDto> scoreRegistration(
             @PathVariable("registrationId") Long registrationId, @PathVariable ("eventId") Long eventId,
             @RequestBody ManualScoreDto manualScoreDto) {
