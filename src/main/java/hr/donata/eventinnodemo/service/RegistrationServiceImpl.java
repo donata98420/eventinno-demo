@@ -24,9 +24,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
     private final ScoreService scoreService;
-
     private final ManualScoreService manualScoreService;
-
 
     public RegistrationServiceImpl(RegistrationRepository registrationRepository, RegistrationMapper registrationMapper, EventRepository eventRepository, ScoreService scoreService, ManualScoreService manualScoreService) {
         this.registrationRepository = registrationRepository;
@@ -35,7 +33,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         this.scoreService = scoreService;
         this.manualScoreService = manualScoreService;
     }
-
 
     @Override
     public ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId) {
@@ -108,11 +105,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         // Checking registration and event (+ exception)
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
-        Registration registration = registrationOptional.orElseThrow(() -> new EntityNotFoundException("Registration not found."));
+        Registration registration = registrationOptional.orElseThrow(() -> new EntityNotFoundException("Registration not found.")); // HTTP 404
 
         Event event = registration.getEvent();
         if (event == null || event.getId() == null || !event.getId().equals(eventId)) {
-            throw new IllegalArgumentException("Sorry, but this registration is not assigned to this event.");
+            throw new IllegalArgumentException("Sorry, but this registration is not assigned to this event."); // HTTP 400
         }
 
         int manualScore;
@@ -129,7 +126,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             return ResponseEntity.ok(registrationDto);
 
         } else {
-            throw new InvalidScoringValueException ("Ooops. Invalid scoring value: " + manualScoreDto.getScore());
+            throw new InvalidScoringValueException ("Ooops. Invalid scoring value: " + manualScoreDto.getScore()); // HTTP 400
         }
 
     }
