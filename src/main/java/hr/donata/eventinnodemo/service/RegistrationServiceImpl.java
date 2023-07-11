@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.MethodNotAllowedException;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -86,36 +86,58 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
     // Manually scoring
+    /*
     @Override
     public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
+
+        // Checking registration and event (+ exception)
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
-
+        Registration registration = null;
         if (registrationOptional.isPresent()) {
-            Registration registration = registrationOptional.get();
+            registration = registrationOptional.get();
 
-            int manualScore;
-            try {
-                manualScore = Integer.parseInt(manualScoreDto.getScore());
-            } catch (NumberFormatException e) {
-                // returning HTTP 400
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed score field! Score must have an integer value.");
+            Event event = registration.getEvent();
+            if (event != null && event.getId() != null && event.getId().equals(eventId)) {
+                registrationRepository.findById(registrationId);
+            } else {
+                throw new IllegalArgumentException("Sorry, there are not registration assigned to this event.");
             }
+        }
 
-            // Saving
-            registrationRepository.save(registration);
+        // Checking scoring - addition or subtraction + exception
+        boolean isAddition = manualScoreDto.isAddition();
+        int scoringValue;
+        try {
+            scoringValue = manualScoreDto.getValue();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid scoring value. " + e.getMessage());
+        }
 
-            return ResponseEntity.noContent().build();
+        // Getting the current score
+        int currentScore = registration.getScore();
+
+        // Updating the score
+        int updatedScore;
+        if (isAddition) {
+            updatedScore = currentScore + scoringValue;
         } else {
-            // returning HTTP 204
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sorry, but your registration is not found.");
+            updatedScore = currentScore - scoringValue;
         }
-    }
 
-    public static class MethodNotAllowedException extends RuntimeException {
-        public MethodNotAllowedException(String message, String name) {
-            super(message + (name.isEmpty() ? "" : " Event: " + name));
+        // Set the updated score
+        registration.setScore(updatedScore);
+
+        // Saving the registration
+        registrationRepository.save(registration);
+
+        public static class MethodNotAllowedException extends RuntimeException {
+            public MethodNotAllowedException(String message, String name) {
+                super(message + (name.isEmpty() ? "" : " Event: " + name));
+            }
         }
+
+
+     */
     }
-}
 
 
