@@ -91,6 +91,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         return ResponseEntity.ok().build();
     }
 
+    public static class MethodNotAllowedException extends RuntimeException {
+        public MethodNotAllowedException(String message, String name) {
+            super(message + (name.isEmpty() ? "" : " Event: " + name));
+        }
+    }
+
 }
 
 
@@ -140,20 +146,13 @@ public ResponseEntity manualScoreRegistration(Long registrationId, Long eventId,
         registrationRepository.save(registration);
     }
 }
+*/
 
 
 
 
 
 
-        public static class MethodNotAllowedException extends RuntimeException {
-            public MethodNotAllowedException(String message, String name) {
-                super(message + (name.isEmpty() ? "" : " Event: " + name));
-            }
-        }
-
-
-     */
 
 
 
