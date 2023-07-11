@@ -7,4 +7,8 @@ public class ManualScoreDto {
 
     private String score;
     private String comment;
+
+    public boolean isAddition() {
+        return score != null && score.equalsIgnoreCase("addition");
+    }
 }
