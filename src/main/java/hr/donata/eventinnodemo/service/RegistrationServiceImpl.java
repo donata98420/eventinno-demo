@@ -128,7 +128,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             return ResponseEntity.ok(registrationDto);
 
         } else {
-            throw new RuntimeException();
+            throw new InvalidScoringValueException ("Ooops. Invalid scoring value: " + manualScoreDto.getScore());
         }
 
     }
@@ -161,7 +161,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     public boolean isSubstraction(String score) {
         return score != null && score.startsWith("-");
     }
-}
+
+    public static class InvalidScoringValueException extends IllegalArgumentException {
+        public InvalidScoringValueException(String message) {
+            super(message);
+        }
+}}
 
 
 
