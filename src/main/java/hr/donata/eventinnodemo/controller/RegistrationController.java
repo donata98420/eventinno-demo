@@ -38,12 +38,11 @@ public class RegistrationController {
     }
 
     @PutMapping("/event/{eventId}/registrations/{registrationId}/score")
-    public ResponseEntity<String> scoreRegistration(
+    public ResponseEntity<RegistrationDto> scoreRegistration(
             @PathVariable("registrationId") Long registrationId, @PathVariable ("eventId") Long eventId,
             @RequestBody ManualScoreDto manualScoreDto) {
 
-        ResponseEntity<RegistrationDto> response = registrationService.scoreRegistration(registrationId, eventId, manualScoreDto);
-        return ResponseEntity.status(response.getStatusCode()).body(String.valueOf(response.getBody()));
+        return registrationService.scoreRegistration(registrationId, eventId, manualScoreDto);
     }
 
 
