@@ -8,13 +8,13 @@ import java.util.UUID;
 public class RegistrationDto {
     private UUID uuid;
     private Long id;
-    private String score;
     private PersonalDto personal;
     private ExperienceDto experience;
     private String motivation;
     private String preferredOs;
-
     private Education education;
+    private String score;
+    private String comments;
 
 
 }
