@@ -1,17 +1,12 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
-import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.ManualScore;
-import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.ManualScoreMapper;
 import hr.donata.eventinnodemo.repository.ManualScoreRepository;
-import hr.donata.eventinnodemo.repository.RegistrationRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Optional;
+
 
 @Service
 @Transactional
