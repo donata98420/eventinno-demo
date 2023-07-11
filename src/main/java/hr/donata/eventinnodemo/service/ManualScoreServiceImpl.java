@@ -1,7 +1,6 @@
 package hr.donata.eventinnodemo.service;
 
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
-import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
@@ -23,32 +22,21 @@ public class ManualScoreServiceImpl implements ManualScoreService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
-    private final ScoreService scoreService;
 
-    @Override
-    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
+    public ResponseEntity scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
+
         // Checking registration and event (+ exception)
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
-        Registration registration = null;
-        if (registrationOptional.isPresent()) {
-            registration = registrationOptional.get();
+        Registration registration = registrationOptional.orElseThrow(() -> new IllegalArgumentException("Registration not found."));
 
-            Event event = registration.getEvent();
-            if (event != null && event.getId() != null && event.getId().equals(eventId)) {
-                registrationRepository.findById(registrationId);
-            } else {
-                throw new IllegalArgumentException("Sorry, there are not registration assigned to this event.");
-            }
+        Event event = registration.getEvent();
+        if (event == null || event.getId() == null || !event.getId().equals(eventId)) {
+            throw new IllegalArgumentException("Registration is not assigned to this event.");
         }
 
         // Checking scoring - addition or subtraction + exception
         boolean isAddition = manualScoreDto.isAddition();
-        int scoringValue;
-        try {
-            scoringValue = manualScoreDto.getValue();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid scoring value. " + e.getMessage());
-        }
+        int scoringValue = manualScoreDto.getValue();
 
         // Set the updated score
         setScore(registration, isAddition, scoringValue);
@@ -56,7 +44,7 @@ public class ManualScoreServiceImpl implements ManualScoreService {
         // Saving the score
         saveScore(registration);
 
-        return ResponseEntity.ok(registrationMapper.registrationToRegistrationDto(registration));
+        return ResponseEntity.ok(registration);
     }
 
     private void setScore(Registration registration, boolean isAddition, int scoringValue) {
@@ -78,6 +66,9 @@ public class ManualScoreServiceImpl implements ManualScoreService {
     private void saveScore(Registration registration) {
         registrationRepository.save(registration);
     }
+}
+
+
 }
 
 
