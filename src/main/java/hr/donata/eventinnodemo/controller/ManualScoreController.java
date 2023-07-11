@@ -18,7 +18,7 @@ public class ManualScoreController {
     }
 
     @PostMapping(path = "/save")
-    private ResponseEntity<ManualScoreDto> saveName(@RequestBody ManualScoreDto manualScoreDto) {
+    private ResponseEntity<ManualScoreDto> saveManualScore(@RequestBody ManualScoreDto manualScoreDto) {
         manualScoreService.create(manualScoreDto);
         return ResponseEntity.ok(manualScoreDto);
     }
