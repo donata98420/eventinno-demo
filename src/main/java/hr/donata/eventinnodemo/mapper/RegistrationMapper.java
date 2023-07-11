@@ -13,6 +13,9 @@ public interface RegistrationMapper {
     RegistrationMapper INSTANCE = Mappers.getMapper(RegistrationMapper.class);
     Registration registrationDtoToRegistration(RegistrationDto registrationDto);
 
+    RegistrationDto registrationToRegistrationDto(Registration registration);
+
+
     default LocalDateTime mapChronoLocalDateTime(ChronoLocalDateTime<?> chronoLocalDateTime) {
         if (chronoLocalDateTime == null) {
             return null;
