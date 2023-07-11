@@ -41,6 +41,7 @@ public class ManualScoreServiceImpl implements ManualScoreService {
     }
 
     private ResponseEntity<Integer> setScore(Registration registration, boolean isAddition, int scoringValue) {
+
         // Getting the current score
         int currentScore = registration.getScore();
 
