@@ -1,5 +1,6 @@
 package hr.donata.eventinnodemo.service;
 
+import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Event;
 import hr.donata.eventinnodemo.entity.Registration;
@@ -84,34 +85,42 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new IllegalArgumentException("Sorry, the registration is not found.");
         }
     }
+
+    @Override
+    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScore) {
+        return ResponseEntity.ok().build();
+    }
+
+}
+
+
     // Manually scoring
     /*
-    @Override
-    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
+
+public ResponseEntity manualScoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
 
         // Checking registration and event (+ exception)
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
-        Registration registration = null;
-        if (registrationOptional.isPresent()) {
-            registration = registrationOptional.get();
+        Registration registration = registrationOptional.orElseThrow(() -> new IllegalArgumentException("Registration not found."));
 
-            Event event = registration.getEvent();
-            if (event != null && event.getId() != null && event.getId().equals(eventId)) {
-                registrationRepository.findById(registrationId);
-            } else {
-                throw new IllegalArgumentException("Sorry, there are not registration assigned to this event.");
-            }
+        Event event = registration.getEvent();
+        if (event == null || event.getId() == null || !event.getId().equals(eventId)) {
+            throw new IllegalArgumentException("Sorry, but this registration is not assigned to this event.");
         }
 
         // Checking scoring - addition or subtraction + exception
         boolean isAddition = manualScoreDto.isAddition();
-        int scoringValue;
-        try {
-            scoringValue = manualScoreDto.getValue();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid scoring value. " + e.getMessage());
-        }
+        int scoringValue = manualScoreDto.getValue();
 
+        // Set the updated score
+        setScore(registration, isAddition, scoringValue);
+
+        // Saving the score
+        saveScore(registration);
+
+    }
+
+    private void setScore(Registration registration, boolean isAddition, int scoringValue) {
         // Getting the current score
         int currentScore = registration.getScore();
 
@@ -123,11 +132,19 @@ public class RegistrationServiceImpl implements RegistrationService {
             updatedScore = currentScore - scoringValue;
         }
 
-        // Set the updated score
+        // Setting the updated score
         registration.setScore(updatedScore);
+    }
 
-        // Saving the registration
+    private void saveScore(Registration registration) {
         registrationRepository.save(registration);
+    }
+}
+
+
+
+
+
 
         public static class MethodNotAllowedException extends RuntimeException {
             public MethodNotAllowedException(String message, String name) {
@@ -137,6 +154,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 
      */
-    }
+
 
 
