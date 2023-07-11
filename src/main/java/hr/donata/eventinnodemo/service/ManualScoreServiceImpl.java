@@ -45,7 +45,7 @@ public class ManualScoreServiceImpl implements ManualScoreService {
         // Getting the current score
         int currentScore = registration.getScore();
 
-        // Updating the score
+        // Updating the score + / -
         int updatedScore;
         if (isAddition) {
             updatedScore = currentScore + scoringValue;
@@ -53,7 +53,7 @@ public class ManualScoreServiceImpl implements ManualScoreService {
             updatedScore = currentScore - scoringValue;
         }
 
-        // Setting the updated score
+        // Setting and returning the updated score
         registration.setScore(updatedScore);
         return ResponseEntity.ok(updatedScore);
     }
