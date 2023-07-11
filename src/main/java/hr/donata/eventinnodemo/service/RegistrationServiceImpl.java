@@ -7,24 +7,34 @@ import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.mapper.RegistrationMapper;
 import hr.donata.eventinnodemo.repository.EventRepository;
 import hr.donata.eventinnodemo.repository.RegistrationRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.MethodNotAllowedException;
+
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final RegistrationMapper registrationMapper;
     private final EventRepository eventRepository;
     private final ScoreService scoreService;
+
+    private final ManualScoreService manualScoreService;
+
+
+    public RegistrationServiceImpl(RegistrationRepository registrationRepository, RegistrationMapper registrationMapper, EventRepository eventRepository, ScoreService scoreService, ManualScoreService manualScoreService) {
+        this.registrationRepository = registrationRepository;
+        this.registrationMapper = registrationMapper;
+        this.eventRepository = eventRepository;
+        this.scoreService = scoreService;
+        this.manualScoreService = manualScoreService;
+    }
+
 
     @Override
     public ResponseEntity<String> create(RegistrationDto registrationDto, Long eventId) {
@@ -86,24 +96,14 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
 
-    @Override
-    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScore) {
-        return ResponseEntity.ok().build();
-    }
-
     public static class MethodNotAllowedException extends RuntimeException {
         public MethodNotAllowedException(String message, String name) {
             super(message + (name.isEmpty() ? "" : " Event: " + name));
         }
     }
-
-}
-
-
     // Manually scoring
-    /*
-
-public ResponseEntity manualScoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
+    @Override
+    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
 
         // Checking registration and event (+ exception)
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
@@ -114,19 +114,26 @@ public ResponseEntity manualScoreRegistration(Long registrationId, Long eventId,
             throw new IllegalArgumentException("Sorry, but this registration is not assigned to this event.");
         }
 
+        int manualScore;
+
         // Checking scoring - addition or subtraction + exception
-        boolean isAddition = manualScoreDto.isAddition();
-        int scoringValue = manualScoreDto.getValue();
+        if(isAddition(manualScoreDto.getScore())) {
+            manualScore = Integer.parseInt(manualScoreDto.getScore().replace("+",""));
+            RegistrationDto registrationDto = setScore(registration, true, manualScore, manualScoreDto);
+            return ResponseEntity.ok(registrationDto);
 
-        // Set the updated score
-        setScore(registration, isAddition, scoringValue);
+        } else if (isSubstraction(manualScoreDto.getScore())) {
+            manualScore = Integer.parseInt(manualScoreDto.getScore().replace("-",""));
+            RegistrationDto registrationDto = setScore(registration, false, manualScore, manualScoreDto);
+            return ResponseEntity.ok(registrationDto);
 
-        // Saving the score
-        saveScore(registration);
+        } else {
+            throw new RuntimeException();
+        }
 
     }
 
-    private void setScore(Registration registration, boolean isAddition, int scoringValue) {
+    private RegistrationDto setScore(Registration registration, boolean isAddition, int scoringValue, ManualScoreDto manualScoreDto) {
         // Getting the current score
         int currentScore = registration.getScore();
 
@@ -140,13 +147,22 @@ public ResponseEntity manualScoreRegistration(Long registrationId, Long eventId,
 
         // Setting the updated score
         registration.setScore(updatedScore);
+        registrationRepository.save(registration);
+        manualScoreService.create(manualScoreDto);
+
+        return registrationMapper.registrationToRegistrationDto(registration);
+
     }
 
-    private void saveScore(Registration registration) {
-        registrationRepository.save(registration);
+    public boolean isAddition(String score) {
+        return score != null && score.startsWith("+");
+    }
+
+    public boolean isSubstraction(String score) {
+        return score != null && score.startsWith("-");
     }
 }
-*/
+
 
 
 
