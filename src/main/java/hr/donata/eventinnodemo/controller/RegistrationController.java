@@ -42,8 +42,7 @@ public class RegistrationController {
             @PathVariable("registrationId") Long registrationId, @PathVariable ("eventId") Long eventId,
             @RequestBody ManualScoreDto manualScoreDto) {
 
-        registrationService.scoreRegistration(registrationId, manualScoreDto);
-        ResponseEntity<RegistrationDto> response = registrationService.scoreRegistration(registrationId, manualScoreDto);
+        ResponseEntity<RegistrationDto> response = registrationService.scoreRegistration(registrationId, eventId, manualScoreDto);
         return ResponseEntity.status(response.getStatusCode()).body(String.valueOf(response.getBody()));
     }
 

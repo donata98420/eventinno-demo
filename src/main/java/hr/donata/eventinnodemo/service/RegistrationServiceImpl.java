@@ -87,7 +87,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
     // Manually scoring
     @Override
-    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, ManualScoreDto manualScoreDto) {
+    public ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScoreDto) {
         Optional<Registration> registrationOptional = registrationRepository.findById(registrationId);
 
         if (registrationOptional.isPresent()) {
