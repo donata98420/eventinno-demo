@@ -59,8 +59,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         Registration registration = registrationMapper.registrationDtoToRegistration(registrationDto);
         registration.setEvent(event);
 
-        // Saving the registration
-        registrationRepository.save(registration);
 
         // Scoring the registration
         int score = scoreService.calculateScore(registration);
