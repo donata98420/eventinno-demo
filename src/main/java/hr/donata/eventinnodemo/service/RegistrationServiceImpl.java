@@ -113,18 +113,18 @@ public class RegistrationServiceImpl implements RegistrationService {
         int manualScore;
 
         // Checking scoring - addition or subtraction + exception
-        if(isAddition(manualScoreDto.getScore())) {
-            manualScore = Integer.parseInt(manualScoreDto.getScore().replace("+",""));
+        if(isAddition(manualScoreDto.getManualScore())) {
+            manualScore = Integer.parseInt(manualScoreDto.getManualScore().replace("+",""));
             RegistrationDto registrationDto = setScore(registration, true, manualScore, manualScoreDto);
             return ResponseEntity.ok(registrationDto);
 
-        } else if (isSubstraction(manualScoreDto.getScore())) {
-            manualScore = Integer.parseInt(manualScoreDto.getScore().replace("-",""));
+        } else if (isSubstraction(manualScoreDto.getManualScore())) {
+            manualScore = Integer.parseInt(manualScoreDto.getManualScore().replace("-",""));
             RegistrationDto registrationDto = setScore(registration, false, manualScore, manualScoreDto);
             return ResponseEntity.ok(registrationDto);
 
         } else {
-            throw new InvalidScoringValueException ("Ooops. Invalid scoring value: " + manualScoreDto.getScore()); // HTTP 400
+            throw new InvalidScoringValueException ("Ooops. Invalid scoring value: " + manualScoreDto.getManualScore()); // HTTP 400
         }
 
     }
