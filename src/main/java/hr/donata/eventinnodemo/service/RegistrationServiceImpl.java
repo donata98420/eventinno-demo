@@ -129,6 +129,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     }
 
+    @Override
+    public Optional<Registration> getById(Long id) {
+        return Optional.of(registrationRepository.getById(id));
+    }
+
     private RegistrationDto setScore(Registration registration, boolean isAddition, int scoringValue, ManualScoreDto manualScoreDto) {
         // Getting the current score
         int currentScore = registration.getScore();
