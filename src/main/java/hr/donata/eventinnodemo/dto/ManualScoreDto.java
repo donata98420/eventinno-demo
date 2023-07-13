@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class ManualScoreDto {
 
-    private String score;
+
+    private String manualScore;
     private String comment;
 }
