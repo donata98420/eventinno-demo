@@ -4,7 +4,6 @@ import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
 import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.service.EventService;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +48,10 @@ public class RegistrationController {
     }
 
     @GetMapping("/event/{eventId}/registrations/{registrationId}")
-    private ResponseEntity<RegistrationDto> getById(@PathVariable Long id) {
-        Optional<Registration> optionalRegistration = registrationService.getRegistrationById(id);
+    private ResponseEntity<Registration> getById(@PathVariable Long registrationId) {
+        // eventId ?
+
+        Optional<Registration> optionalRegistration = registrationService.getRegistrationById(registrationId);
         if(optionalRegistration.isPresent()) {
             return ResponseEntity.ok(optionalRegistration.get());
         }
@@ -59,7 +60,7 @@ public class RegistrationController {
     }
 
 
-}
+
 
 
 
