@@ -14,7 +14,6 @@ public class RegistrationDto {
     private String preferredOs;
     private Education education;
     private String score;
-    private String comments;
 
 
 }
