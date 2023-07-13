@@ -2,10 +2,13 @@ package hr.donata.eventinnodemo.controller;
 
 import hr.donata.eventinnodemo.dto.ManualScoreDto;
 import hr.donata.eventinnodemo.dto.RegistrationDto;
+import hr.donata.eventinnodemo.entity.Registration;
 import hr.donata.eventinnodemo.service.EventService;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import hr.donata.eventinnodemo.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/registration")
@@ -43,6 +46,21 @@ public class RegistrationController {
             @RequestBody ManualScoreDto manualScoreDto) {
 
         return registrationService.scoreRegistration(registrationId, eventId, manualScoreDto);
+    }
+
+    @GetMapping("/event/{eventId}/registrations/{registrationId}")
+    public ResponseEntity<RegistrationDto> getById(@PathVariable("eventId") Long eventId, @PathVariable("registrationId") Long registrationId) {
+        Optional<Registration> optionalRegistration = registrationService.getById(registrationId);
+
+        if (optionalRegistration.isPresent()) {
+            Registration registration = optionalRegistration.get();
+            return (ResponseEntity<RegistrationDto>) ResponseEntity.ok();
+        }
+        try {
+            throw new ChangeSetPersister.NotFoundException(); // HTTP 404
+        } catch (ChangeSetPersister.NotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
