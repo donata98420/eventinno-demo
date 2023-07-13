@@ -19,7 +19,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/{eventId}/registrations")
-    public ResponseEntity<String> saveRegistration(@RequestBody RegistrationDto registrationDto, @PathVariable("event_id") Long eventId) {
+    public ResponseEntity<String> saveRegistration(@RequestBody RegistrationDto registrationDto, @PathVariable("eventId") Long eventId) {
         ResponseEntity<String> response = registrationService.create(registrationDto, eventId);
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
