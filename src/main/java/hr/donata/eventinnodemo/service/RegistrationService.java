@@ -13,5 +13,5 @@ public interface RegistrationService {
     void deleteRegistrationForEvent(Long registrationId, Long eventId);
     ResponseEntity<RegistrationDto> scoreRegistration(Long registrationId, Long eventId, ManualScoreDto manualScore);
 
-    Optional<Registration> getById(Long id);
+    Optional<Registration> getRegistrationById(Long id);
 }

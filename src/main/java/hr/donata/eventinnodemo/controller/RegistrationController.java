@@ -49,18 +49,13 @@ public class RegistrationController {
     }
 
     @GetMapping("/event/{eventId}/registrations/{registrationId}")
-    public ResponseEntity<RegistrationDto> getById(@PathVariable("eventId") Long eventId, @PathVariable("registrationId") Long registrationId) {
-        Optional<Registration> optionalRegistration = registrationService.getById(registrationId);
-
-        if (optionalRegistration.isPresent()) {
-            Registration registration = optionalRegistration.get();
-            return (ResponseEntity<RegistrationDto>) ResponseEntity.ok();
+    private ResponseEntity<RegistrationDto> getById(@PathVariable Long id) {
+        Optional<Registration> optionalRegistration = registrationService.getRegistrationById(id);
+        if(optionalRegistration.isPresent()) {
+            return ResponseEntity.ok(optionalRegistration.get());
         }
-        try {
-            throw new ChangeSetPersister.NotFoundException(); // HTTP 404
-        } catch (ChangeSetPersister.NotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        throw new RuntimeException("This registration does not exist.");
+    }
     }
 
 

@@ -130,8 +130,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public Optional<Registration> getById(Long id) {
-        return Optional.of(registrationRepository.getById(id));
+    public Optional<Registration> getRegistrationById(Long id) {
+        return registrationRepository.findById(id);
     }
 
     private RegistrationDto setScore(Registration registration, boolean isAddition, int scoringValue, ManualScoreDto manualScoreDto) {
